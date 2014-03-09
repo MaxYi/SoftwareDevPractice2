@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>用户注册_中国研究生招生信息网</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href='http://t1.chsi.com.cn/yz/css/user.css' type="text/css" media="all" />
+
+
+
+
+<link rel="stylesheet" type="text/css" href='http://t2.chsi.com.cn/yz/css/base/base_960_24.css'/>
+<link rel="stylesheet" type="text/css" href='http://t4.chsi.com.cn/yz/css/base/ui.css'/>
+<link rel="stylesheet" type="text/css" href='http://t3.chsi.com.cn/yz/css/custom/user.css'/>
+<script type='text/javascript' src='http://t1.chsi.com.cn/common/jquery/1.8.3/jquery.min.js'></script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-100524-7']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head> 
+<body>
+<div id="head_wrap">
+  <h1>&nbsp;</h1>
+</div>
+
+
+
+
+<script language="JavaScript" src="/js/xmlreq.js"></script>
+<script language="JavaScript">
+function CheckForm()
+{
+	if (document.registeForm.userName.value.length == 0) {
+		alert("请输入您的用户名.");
+		document.registeForm.userName.focus();
+		return false;
+	}
+	if ((document.registeForm.userName.value.length > 14) || (document.registeForm.userName.value.length < 5)) {
+		alert("用户名长度不符合要求");
+		document.registeForm.userName.focus();
+		return false;
+	}
+	if (document.registeForm.userName.value.indexOf("<")!=-1 || document.registeForm.userName.value.indexOf(">")!=-1){
+		alert("用户名中只能是英文字母或者数字，不能是中文");
+		document.registeForm.userName.focus();
+		return false;
+	}
+	if (document.registeForm.userName.value.indexOf("'")!=-1){
+		alert("用户名中不能包含 (') ");
+		document.registeForm.userName.focus();
+		return false;
+	}
+	if (document.registeForm.userPassword.value.length == 0) {
+		alert("请输入您的密码.");
+		document.registeForm.userPassword.focus();
+		return false;
+	}
+	if ((document.registeForm.userPassword.value.length < 6) || (document.registeForm.userPassword.value.length > 14)) {
+		alert("密码长度不合适.");
+		document.registeForm.userPassword.focus();
+		return false;
+	}
+		if (document.registeForm.repassword.value.length == 0) {
+		alert("请确认您的密码.");
+		document.registeForm.repassword.focus();
+		return false;
+	}
+	if (document.registeForm.userPassword.value != document.registeForm.repassword.value) {
+		alert("您两次输入的密码不一样！请重新输入.");
+		document.registeForm.userPassword.focus();
+		return false;
+	}
+	if (document.registeForm.checkNum.value == "") {
+		alert("请输入验证码");
+		document.registeForm.checkNum.focus();
+		return false;
+	}
+	if (document.registeForm.userEmail.value.length == 0) {
+		alert("请输入您的Email.");
+		document.registeForm.userEmail.focus();
+		return false;
+	}
+		if (document.registeForm.userEmail.value.length > 0 && !document.registeForm.userEmail.value.match( /^.+@.+$/ ) ) {
+		alert("Email 错误！请重新输入");
+		document.registeForm.userEmail.focus();
+		return false;
+	}
+	return true;
+}
+
+function checkname(){
+	var nameofUser = registeForm.userName.value;
+	if(nameofUser == ""){
+		window.alert("不能为空");
+		return false;
+	}
+	if((nameofUser.length <5) || (nameofUser.length > 14)){
+		window.alert("长度不合适");
+		return false;
+	}
+	var checkurl = "/user/checkname.jsp?username=" + nameofUser;
+	xmlhttp.open("GET",checkurl,true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4){
+		    if(xmlhttp.status == "200"){
+			    window.alert(xmlhttp.responseText);
+		    }else{
+			    window.alert("链接错误");
+		    }
+		}
+	};
+}
+</script>
+<div id="content" class="container_24 clearfix">
+  <div class="clearfix" id="user_box">
+    <div class="user-bh">
+      <h2>用户注册</h2>
+    </div>
+    <div class="user-bd">
+      <div class="register_form">
+        <form name="registeForm" method="POST" action="/user/newUser.do" onsubmit="return CheckForm();">  
+        <table width="80%" border="1" cellspacing="1" cellpadding="4">
+          <tbody>
+          <tr><td colspan="2"></td></tr>
+            <tr>
+              <td width="21%" class="text_right"><font color="#ff0000">*</font>用户名：</td>
+              <td width="79%" align="left"><input type="text" name="userName" maxlength="14" size="30" value="" class="bbsInput_short">
+                <span style="color:#666666">&nbsp;&nbsp;5～14位英文或数字</span>&nbsp;&nbsp;
+                <input type="button" style="color:#009900" onclick="checkname();" class="buttonSel" value="检查是否重名">
+                &nbsp;&nbsp;</td>
+            </tr>
+            <tr >
+              <td width="21%" class="text_right">真实姓名：</td>
+              <td width="79%" align="left"><input type="text" name="userTrueName" maxlength="20" size="10" value="" class="bbsInput_short"></td>
+            </tr>
+            <tr>
+              <td class="text_right"><font color="#ff0000">*</font>密码：</td>
+              <td align="left"><input type="password" name="userPassword" maxlength="14" size="14" value="" class="bbsInput_short">
+                <span style="color:#666666">&nbsp;&nbsp;6～14个英文或数字，区分大小写</span><br></td>
+            </tr>
+            <tr >
+              <td class="text_right"><font color="#ff0000">*</font>确认密码：</td>
+              <td align="left"><input type="password" class="bbsInput_short" value="" size="14" maxlength="14" name="repassword">
+                </td>
+            </tr>
+            <tr >
+              <td class="text_right"><font color="#ff0000">*</font>性别：</td>
+              <td align="left"><select name="userGender"><option value="1">男</option>
+                <option value="2">女</option></select></td>
+            </tr>
+            <tr >
+              <td class="text_right">联系电话： </td>
+              <td align="left"><font color="#9A1C4C">
+                <input type="text" name="userTel" maxlength="30" size="12" value="" class="bbsInput_short">
+                </font></td>
+            </tr>
+            <tr >
+              <td class="text_right"><font color="#ff0000">*</font>电子邮件：</td>
+              <td align="left"><input type="text" name="userEmail" maxlength="50" size="30" value="" class="bbsInput_short">
+                &nbsp;&nbsp;<span style="color:#ff0000;">用于找回密码，请正确填写<br>
+                </span></td>
+            </tr>
+            <tr >
+              <td height="40" colspan="4"><div align="center">
+                <input type="submit" value="注 册" class="buttonDeep">
+                &nbsp;&nbsp; 
+                <input type="reset" value="清 除" class="buttonSel">
+                &nbsp;&nbsp; 
+                <input type="reset" value="返 回" onclick="history.back(-1);" class="buttonSel">
+                </div></td>
+            </tr>
+            
+          </tbody>
+        </table>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<style type="text/css">#footer{ width:950px; margin:10px auto; padding:10px 0; overflow:hidden; text-align:center; border-top: 1px solid #BFE0F0; line-height:24px; clear:both; font-size:12px;}#footer a:link,#footer a:visited {color: #333333;    text-decoration: none;}#footer a:hover {    color: #990000;    text-decoration: underline;}  #footer img{ padding-bottom:0px;}</style>
+<div class="footer" id="footer"></div>
+
+
+</body>
+</html>
+
