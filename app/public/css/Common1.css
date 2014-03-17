@@ -507,3 +507,6 @@ table.middle td
  vertical-align:middle;
  text-align:center;
 }
+
+.slider{height:170px; margin:20px auto; overflow:hidden; position:relative;}
+.sliderbox{position:relative;}/*必须加这句css,否则向左右，上下滚动时会没有效果*/

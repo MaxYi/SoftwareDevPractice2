@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: '' });
+  res.render('index', { title: '工程硕士网上报名信息系统' });
 };
