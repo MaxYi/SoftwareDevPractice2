@@ -2,26 +2,24 @@
 <html>
   <head>
     <title>华东师范大学软件学院工程硕士网上报名信息系统</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-  <%-title%>
-
   <style type="text/css">
-    <!--
-    body {
-    	margin-left: 0px;
-    	margin-top: 0px;
-    	margin-right: 0px;
-    	margin-bottom: 0px;
-    }
-    -->
-  </style>
-  <script type="text/javascript" src="js/script.js"></script> 
-  <link href="css/Common1.css" rel="stylesheet" type="text/css">
+<!--
+body {
+	background-color: ebeeeb;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+-->
+</style>
+  <link href="Common1.css" rel="stylesheet" type="text/css">
   </head>
   
   <body>
@@ -32,7 +30,7 @@
   </table>
   <table width="978" height="32" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
-      <td background="img/tiao1.gif"><table width="900" border="0" cellspacing="0" cellpadding="0">
+      <td bgcolor=""><table width="900" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="500" class="public_Memu_word" id="datetd">2008-12-30 星期三</td>
        <td><a href="#" class="public_Memu_A" onClick="alert('您必须登录才能使用该功能')">网上报考</a></td>
@@ -46,13 +44,13 @@
       <td><table width="978" height="400" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td width="80">&nbsp;</td>
-          <td width="240" valign="top" background="#"><table width="216" height="400" border="0" cellpadding="0" cellspacing="0">
+          <td width="240" valign="top" background="../image/login_back2.gif"><table width="216" height="400" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td width="200" height="35">&nbsp;</td>
             </tr>
             <tr>
               <td height="140" valign="top" class="Login_form2"><table border="0" cellpadding="0" cellspacing="0">
-                <form name="form1" method="post" action="#">
+                <form name="form1" method="post" action="./login.do">
                   <tr valign="top">
                     <td height="40" colspan="2"><span class="login_loginfont2">- 考生登录</span></td>
                   </tr>
@@ -68,8 +66,8 @@
                     <td height="40" colspan="2">
                       <input type="submit" name="Submit" value="登录">
 
-                      <input type="button" name="Submit2" value="注册" onClick="signUp()">                      
-                      <input type="button" name="Submit3" value="找回密码" onClick="#"> 　                    </td>
+                      <input type="button" name="Submit2" value="注册" onClick="window.open('./register.do','_self')">                      
+                      <input type="button" name="Submit3" value="找回密码" onClick="window.open('./findbackpassword.do','_blank')"> 　                    </td>
                   </tr>
                 </form>
               </table></td>
@@ -77,38 +75,28 @@
             <tr>
               <td valign="top" class="Login_form2"><table width="190"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="login_loginfont2">- 咨询电话</td>
+                  <td height="28" align="center" valign="middle"><font style="font-weight:bold"/>联系电话</td>
                 </tr>
               </table>
                 <table width="190" height="60" border="0" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td width="46" height="60" align="center" valign="middle" class="tdMenuGray">&nbsp;</td>
-                    <td width="144" align="left" valign="middle" class="tdMenuGray"><p>021-0000 0000</p>
-                        <p> 021-1111 1111</p>
+                    <td align="center" valign="middle" class="zt-title">
+                    	<p>021-XXXXXXXX</p>
+                        <p>021-XXXXXXXX</p>
                      </td>
                   </tr>
                 </table>
                 <table width="190"  border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="login_loginfont2">- 联系地址</td>
+                    <td height="28" align="center" valign="middle"><font style="font-weight:bold"/>联系地址</td>
                   </tr>
                 </table>
                 <table width="190" height="60" border="0" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td width="46" align="center" valign="middle" class="zt-title"><p class="tdMenuGray">&nbsp;</p></td>
-                    <td width="144" align="left" valign="middle" class="tdMenuGray">上海市普陀区中山北路3663号</td>
-                  </tr>
-                </table>
-                <table width="190"  border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="login_loginfont2">- 邮政编码</td>
+                    <td width="46" align="center" valign="middle" class="zt-title">上海市普陀区中山北路3663号</td>
                   </tr>
                 </table>
                 <table width="190" height="30" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td width="45" align="center" valign="middle" class="tdMenuGray"><div align="center"></div></td>
-                    <td width="145" align="left" valign="middle" class="tdMenuGray"><div align="left">200062</div></td>
-                  </tr>
                 </table></td>
             </tr>
           </table></td>
@@ -122,7 +110,7 @@
               <td height="60" ><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="20">&nbsp;</td>
-                  <td><img src="#" width="254" height="45"></td>
+                  <td><img src="" width="254" height="45"></td>
                 </tr>
               </table></td>
             </tr>
@@ -130,7 +118,7 @@
               <td valign="top"><table width="480" height="25" border="0" cellpadding="0" cellspacing="0">
 				   
                   <tr>
-                    <td height="25"><a href="#" target="_blank" class="A_login_word1">2014年度华东师范大学软件学院工程硕士招生公告</a> </td>
+                    <td height="25"><a href="#" target="_blank" class="A_login_word1">2014年度华东师范大软件学院招收工程硕士（春季）的公告</a> </td>
                   </tr>
 				   
                   <tr>
@@ -155,15 +143,15 @@
 				 <table width="480" height="25" border="0" cellpadding="0" cellspacing="0">
 				  
                   <tr>
-                    <td height="25"><a href="#" target="_blank" class="A_login_word1">2014年度华东师范大学软件学院工程硕士招考简章</a> </td>
+                    <td height="25"><a href="#.xls" target="_blank" class="A_login_word1">2014年度华东师范大学软件学院工程硕士招考简章</a> </td>
                   </tr>
 				   
                   <tr>
-                    <td height="25"><a href="#" target="_blank" class="A_login_word1">2014年度华东师范大学软件学院工程硕士务员报考指南</a> </td>
+                    <td height="25"><a href="# ) .zip" target="_blank" class="A_login_word1">2014年度华东师范大学软件学院工程硕士务员报考指南</a> </td>
                   </tr>
 				   
                   <tr>
-                    <td height="25"><a href="#" target="_blank" class="A_login_word1">考试大纲</a> </td>
+                    <td height="25"><a href="#doc" target="_blank" class="A_login_word1">考试大纲</a> </td>
                   </tr>
 				     
                   </table>				 
@@ -174,19 +162,19 @@
                     </tr>
                     <tr>
                       <td width="2" height="27" ></td>
-                      <td class="Label"><font size="+1"><a href="#" target="_blank" class="A_login_word1">网上报名技术和考务问答</a> <span class="reg_red">(考生必读)</span></font></td>
+                      <td class="Label"><font size="+1"><a href="../info/zysx.htm" target="_blank" class="A_login_word1">网上报名技术和考务问答</a> <span class="reg_red">(考生必读)</span></font></td>
                     </tr>
                     <tr>
                       <td width="2" height="27" ></td>
-                      <td class="Label"><a href="#" target="_blank" class="A_login_word1">网上报名前所需准备事项</a> <font size="+1"><span class="reg_red">(考生必读)</span></font></td>
+                      <td class="Label"><a href="../info/zbsx.htm" target="_blank" class="A_login_word1">网上报名前所需准备事项</a> <font size="+1"><span class="reg_red">(考生必读)</span></font></td>
                     </tr>
                     <tr>
                       <td width="2" height="26" ></td>
-                      <td class="Label"><a href="#" target="_blank" class="A_login_word1">报名系统支持的网上银行</a></td>
+                      <td class="Label"><a href="../info/bank.htm" target="_blank" class="A_login_word1">报名系统支持的网上银行</a></td>
                     </tr>
                     <tr>
                       <td width="2" height="26" ></td>
-                      <td class="Label"><a href="#" target="_blank" class="A_login_word1">关于制作网上报名一寸照片的说明</a></td>
+                      <td class="Label"><a href="../info/photo.doc" target="_blank" class="A_login_word1">关于制作网上报名一寸照片的说明</a></td>
                     </tr>
                   </table></td>
             </tr>
@@ -197,15 +185,14 @@
   </table>
   <table width="978" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
-      <td bgcolor="#FFFFFF"><img src="img/bottom1.jpg" width="978" height="32"></td>
+      <td bgcolor="#ebeeeb"><img src="" width="978" height="32"></td>
     </tr>
   </table>
   </body>
 </html>
-
 <SCRIPT language=JavaScript>
-
 var today = new Date();
+
 var d = new Array();
 
 d[0] = "星期日";
@@ -215,7 +202,7 @@ d[3] = "星期三";
 d[4] = "星期四";
 d[5] = "星期五";
 d[6] = "星期六";
-var datehtml = "<font color='#ffffff' style='font-size:9pt;font-family:宋体'> ";
+var datehtml = "<font color='#50554e' style='font-size:9pt;font-family:宋体'> ";
 datehtml = datehtml + today.getFullYear();
 datehtml = datehtml + "/";
 datehtml = datehtml + (today.getMonth()+1);

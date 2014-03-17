@@ -24,7 +24,7 @@ table.public
  border:1px solid #0061C2;
  border-top:0px;
  border-bottom:0px;
- background-color:#FFFFFF;
+ background-color:#ebeeeb;
  height:350px;
 }
 
@@ -116,7 +116,7 @@ tr.public_form_td a:link
  padding-Left:30px;
  padding-top:15px;
  font-size:12px;
- font:"宋体";
+ font:"微软雅黑";
  color:#003366;
  }
  
@@ -124,7 +124,7 @@ tr.public_form_td a:link
  {
  padding-Left:30px;
  padding-top:15px;
- font:"宋体";
+ font:"微软雅黑";
  font-size:13px;
  color:#996666;
  }
@@ -136,7 +136,7 @@ tr.public_form_td a:link
  padding-bottom:2px;
  color:#999999;
  font-size:12px;
- font:"宋体";
+ font:"微软雅黑";
  }
  
  .alterKsInfo_Label
@@ -146,7 +146,7 @@ tr.public_form_td a:link
  padding-bottom:2px;
  color:#999999;
  font-size:12px;
- font:"宋体";
+ font:"微软雅黑";
  }
  
  .bigtitle
@@ -170,7 +170,7 @@ tr.public_form_td a:link
  padding-top:5px;
  padding-bottom:2px;
  font-size:12px;
- font:"宋体";
+ font:"微软雅黑";
  }
  
  .login_loginfont2
@@ -181,7 +181,7 @@ tr.public_form_td a:link
   color:#203F61;
   font-size:12px;
   line-height:15px;
-  font:"宋体";
+  font:"微软雅黑";
  }
  .login_loginfont2 b
  {
@@ -251,7 +251,7 @@ tr.public_form_td a:link
  padding-top:5px;
  padding-left:20px;
  font-size:11px;
- color:#FFFFFF;
+ color:#50554e;
 }
 
 .public_Memu_A
@@ -259,20 +259,20 @@ tr.public_form_td a:link
  padding-top:5px;
  padding-left:20px;
  font-size:11px;
- color:#FFFFFF;
+ font:"微软雅黑";
 }
 
 .public_Memu_A:link {
-      FONT-SIZE:11px;COLOR:#FFFFFF; TEXT-DECORATION:None
+      FONT-SIZE:11px;COLOR:#50554e; TEXT-DECORATION:None
 }
 .public_Memu_A:visited {
-      FONT-SIZE:11px; COLOR:#FFFFFF; TEXT-DECORATION:None
+      FONT-SIZE:11px; COLOR:#50554e; TEXT-DECORATION:None
 }
 .public_Memu_A:active {
-      FONT-SIZE:11px; COLOR:#FFFFFF; TEXT-DECORATION:None
+      FONT-SIZE:11px; COLOR:#a6412b; TEXT-DECORATION:None
 }
 .public_Memu_A:hover {
-      FONT-SIZE:11px; COLOR:#FFFFFF; TEXT-DECORATION:None
+      FONT-SIZE:11px; COLOR:#a6412b; TEXT-DECORATION:None
 }
 
 .form_Word_A
@@ -328,7 +328,7 @@ table.alterKsInfo_table
  padding-top:5px;
  padding-bottom:5px;
  font-size:12px;
- font:"宋体";
+ font:"微软雅黑";
  font-weight:normal;
  color:#0099CC;
  }
@@ -348,7 +348,7 @@ table.alterKsInfo_table
  
  .public_big_A
  {
-  font:"宋体";
+  font:"微软雅黑";
   font-size:14px;
   color:#006699;
  }
@@ -367,19 +367,19 @@ table.alterKsInfo_table
 }
 
 .zt1 {
-	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "宋体"
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "微软雅黑"
 }
 .btn1 {
-	BORDER-RIGHT: #006699 1px solid; BORDER-TOP: #006699 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #006699 1px solid; COLOR: #000000; BORDER-BOTTOM: #006699 1px solid; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #d3e7f5
+	BORDER-RIGHT: #006699 1px solid; BORDER-TOP: #006699 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #006699 1px solid; COLOR: #000000; BORDER-BOTTOM: #006699 1px solid; FONT-FAMILY: "微软雅黑"; BACKGROUND-COLOR: #d3e7f5
 }
 .inpt1 {
-	BORDER-RIGHT: #666699 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #666699 1px solid; PADDING-LEFT: 1px; FONT-SIZE: 12px; PADDING-BOTTOM: 1px; BORDER-LEFT: #666699 1px solid; COLOR: #666699; PADDING-TOP: 1px; BORDER-BOTTOM: #666699 1px solid; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #f1f5fa
+	BORDER-RIGHT: #666699 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #666699 1px solid; PADDING-LEFT: 1px; FONT-SIZE: 12px; PADDING-BOTTOM: 1px; BORDER-LEFT: #666699 1px solid; COLOR: #666699; PADDING-TOP: 1px; BORDER-BOTTOM: #666699 1px solid; FONT-FAMILY: "微软雅黑"; BACKGROUND-COLOR: #f1f5fa
 }
 .inpt-line {
-	BORDER-RIGHT: #666699 1px; BORDER-TOP: #666699 1px; FONT-SIZE: 12px; BORDER-LEFT: #666699 1px; COLOR: #000000; BORDER-BOTTOM: #666699 1px solid; FONT-FAMILY: "宋体"
+	BORDER-RIGHT: #666699 1px; BORDER-TOP: #666699 1px; FONT-SIZE: 12px; BORDER-LEFT: #666699 1px; COLOR: #000000; BORDER-BOTTOM: #666699 1px solid; FONT-FAMILY: "微软雅黑"
 }
 .btn2 {
-	BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #6699cc 1px solid; COLOR: #000000; BORDER-BOTTOM: #6699cc 1px solid; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #def0f3
+	BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #6699cc 1px solid; COLOR: #000000; BORDER-BOTTOM: #6699cc 1px solid; FONT-FAMILY: "微软雅黑"; BACKGROUND-COLOR: #def0f3
 }
 .Menu:hover {
 	FONT-SIZE: 12px; CURSOR: hand; COLOR: #ffffff
@@ -409,10 +409,10 @@ table.alterKsInfo_table
 	BORDER-RIGHT: #339999 1px solid; BORDER-TOP: #339999 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #339999 1px solid; COLOR: #666699; BORDER-BOTTOM: #339999 1px solid; BACKGROUND-COLOR: #e7e7ef
 }
 .zt-link {
-	FONT-SIZE: 12px; CURSOR: hand; COLOR: #5c5c8b; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+	FONT-SIZE: 12px; CURSOR: hand; COLOR: #5c5c8b; FONT-FAMILY: "微软雅黑"; TEXT-DECORATION: underline
 }
 .zt2 {
-	FONT-SIZE: 12px; COLOR: #003366; FONT-FAMILY: "宋体"
+	FONT-SIZE: 12px; COLOR: #003366; FONT-FAMILY: "微软雅黑"
 }
 .textMenu {
 	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #cc6600
@@ -424,22 +424,22 @@ table.alterKsInfo_table
 	FONT-SIZE: 12px; COLOR: #ffffff
 }
 .inpt-none {
-	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12px; BORDER-LEFT: medium none; COLOR: #666699; BORDER-BOTTOM: medium none; FONT-FAMILY: "宋体"
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 12px; BORDER-LEFT: medium none; COLOR: #666699; BORDER-BOTTOM: medium none; FONT-FAMILY: "微软雅黑"
 }
 .zt3 {
 	FONT-SIZE: 12px; COLOR: #ff6633
 }
 printer-zt {
-	COLOR: #000000; FONT-FAMILY: "宋体"
+	COLOR: #000000; FONT-FAMILY: "微软雅黑"
 }
 .printer-zt {
-	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: "宋体"
+	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: "微软雅黑"
 }
 .printer-head {
 	FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #000000; FONT-FAMILY: "黑体"
 }
 .printer-inpt {
-	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 14px; BORDER-LEFT: medium none; COLOR: #000000; BORDER-BOTTOM: medium none; FONT-FAMILY: "宋体"
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 14px; BORDER-LEFT: medium none; COLOR: #000000; BORDER-BOTTOM: medium none; FONT-FAMILY: "微软雅黑"
 }
 .first {
 	FONT-WEIGHT: bolder; FONT-SIZE: 12px; COLOR: #333366
@@ -473,12 +473,12 @@ padding:5px;
 text-align:right;
 vertical-align:middle;
 color:#999999;
-font:"宋体";
+font:"微软雅黑";
 font-size:12px;
 }
 
 table.pagefoot a{ 
-font:"宋体";
+font:"微软雅黑";
 font-size:12px;
 }
 
