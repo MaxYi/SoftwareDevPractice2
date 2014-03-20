@@ -3,6 +3,11 @@
  * @author Qian Yi
  */
 module.exports = function (app) {
+	var dbclient = app.get('dbclient');
+
+	var userCol = dbclient.collection('user');
+	var profileCol = dbclient.collection('profile');
+
 	var list = function(req, res){
 		res.render('register');
 		// res.send("respond with a resource");
