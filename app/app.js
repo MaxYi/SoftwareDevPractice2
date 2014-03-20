@@ -1,49 +1,20 @@
-
 /**
- * Module dependencies.
+ * @author Qian Yi
  */
+var express = require('express')
+	,	conf = require('./config');
 
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-var ejs = require('ejs');
+var app = module.exports = express();
 
-var app = express();
+// load configuration
+conf.appConfig(app);
+// start server listener
+app.listen(app.get('port'));
 
-// all environments
-app.set('port', process.env.PORT || 80);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
-// 默认图标
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.cookieParser('testtest'));
-
-// http请求的改写
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-app.engine('html', ejs.renderFile);
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
-app.get('/', routes.index);
-app.get('/register', user.register);
-app.post('/login', user.login);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+require('./routes')(app);
 
 process.on('uncaughtException',function(err){
-	//nothing
-	console.error(err);
+	// log
+	console.error("There is an uncaughtException");
+	console.trace(err);
 });
