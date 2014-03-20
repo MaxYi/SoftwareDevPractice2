@@ -20,7 +20,7 @@ var register = function () {
 	$.post('/register',postObj,function (res) {
 		if (res === 200) {
 			$("#modal-login").val(account);
-			$("#modal-register").val("ï¼?);
+			$("#modal-register").val("?");
 
 		}
 		//alert("this is a signUp");
