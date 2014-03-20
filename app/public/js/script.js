@@ -3,7 +3,7 @@ var register = function () {
 	// get elements
 	var account = $("#inputaccount").val() 
 		, pwd = $("#inputpassworc").val()
-		，realname = $("#inputrealame").val() 
+		, realname = $("#inputrealame").val() 
 		, idnumber = $("#inputidnumber").val()
 		, email = $("#inputemail").val() 
 		, phonenumber = $("#inputphonenumber").val();
