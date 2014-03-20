@@ -21,5 +21,5 @@ exports.register = function(req, res){
 	// if (true) {
 	// 	res.send(token);
 	// }
-  res.render('signUp', { title: '工程硕士网上报名注册' });
+  res.render('register', { title: '工程硕士网上报名注册' });
 };

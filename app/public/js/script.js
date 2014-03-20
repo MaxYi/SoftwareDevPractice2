@@ -21,9 +21,15 @@ var register = function () {
 		if (res === 200) {
 			$("#modal-login").val(account);
 			$("#modal-register").val("?");
-
 		}
 		//alert("this is a signUp");
 		console.log(res);
 	});
+};
+
+var login = function () {
+	// var attr = document;
+	$('#loginModal').modal('hide');
+	$('#register').remove();
+	$('#modal-login').html("你好，顾戈弋");
 };

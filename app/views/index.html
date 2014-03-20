@@ -45,7 +45,7 @@
           <p class="navbar-text"><a href="http://www.sei.ecnu.edu.cn/s/57/t/58/main.htm" class="navbar-link">软件学院</a></p>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a id="modal-login" href="#modal-container-login" role="button" data-toggle="modal">登陆</a>
+							<a id="modal-login" href="#loginModal" role="button" data-toggle="modal">登陆</a>
 						</li>
 						<li>
               <a id="register" href="/register" role="button">注册</a>
@@ -59,7 +59,7 @@
       <div class="row clearfix">
       <div class="col-md-12 column">
         <!-- login window  -->
-        <div class="modal fade" id="modal-container-login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -68,7 +68,7 @@
               </div>  
               <div class="modal-body row">
                 <div class="col-md-7">
-                  <form class="form-horizontal" role="form" onsubmit="login()">
+                  <form class="form-horizontal" role="form">
                     <div class="form-group">
                        <label for="inputAccount" class="col-sm-3 control-label">账户</label>
                       <div class="col-sm-9">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
-                         <button type="submit" class="btn btn-primary">登陆</button>
+                         <button type="button" class="btn btn-primary" onclick="login()">登陆</button>
                          <button type="button" class="btn btn-link">忘记密码？</button>
                       </div>
                     </div>
