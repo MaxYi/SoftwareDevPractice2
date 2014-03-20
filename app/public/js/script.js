@@ -29,7 +29,8 @@ var register = function () {
 
 var login = function () {
 	// var attr = document;
+	var account = $('#inputAccount').val();
 	$('#loginModal').modal('hide');
 	$('#register').remove();
-	$('#modal-login').html("你好，顾戈弋");
+	$('#modal-login').html("你好，" + account);
 };
