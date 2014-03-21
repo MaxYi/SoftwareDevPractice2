@@ -22,6 +22,10 @@ module.exports = function (app) {
 	  res.render('register', { title: '工程硕士网上报名注册' });
 	});
 
+	app.get('/admin', function (req, res) {
+		res.render('adminPanel');
+	});
+
 	app.get('/login', function (req, res) {
 		res.render('login');
 	});
