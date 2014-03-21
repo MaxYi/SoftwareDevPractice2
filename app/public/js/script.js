@@ -35,5 +35,26 @@ var login = function () {
 	var account = $('#inputAccount').val();
 	$('#loginModal').modal('hide');
 	$('#register').remove();
-	$('#modal-login').html("你好，" + account);
+	// $('#modal-login').html("你好，" + account);
+	$('#modal-login').remove();
+	$("#tab").append(helloStr);
 };
+
+var helloStr = '<li class="dropdown">'
+						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>'
+						+		'<ul class="dropdown-menu">'
+						+		'<li>'
+						+		'<a href="{myInfo}">我的信息</a>'
+						+		'</li>'
+						+		'<li>'
+						+		'<a href="{enterMS}">进入后台</a>'
+						+		'</li>'
+						+		'<li class="divider">'
+						+		'</li>'
+						+		'<li>'
+						+		'<a href="{logout}">退出</a>'
+						+		'</li>'
+						+		'</ul>'
+						+		'</li>';
+
+var temp = helloStr.replace("{myInfo}",'ggy nb');
