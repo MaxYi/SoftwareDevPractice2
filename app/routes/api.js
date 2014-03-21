@@ -22,6 +22,10 @@ module.exports = function (app) {
 	  res.render('register', { title: '工程硕士网上报名注册' });
 	});
 
+	app.get('login', function (req, res) {
+		res.render('login');
+	};
+
 	app.post('/login', function (req, res) {
 		var account = req.param('email')
 			,	pwd = req.param('password');
