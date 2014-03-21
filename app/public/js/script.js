@@ -1,3 +1,6 @@
+/**
+ * @author GuGeyi
+ */
 var register = function () {
 
 	// get elements
