@@ -31,6 +31,11 @@ var register = function () {
 		console.log(res);
 };
 
+var relogin = function(){
+  $(document).ready(function(){
+		window.location.href = "./login";
+	});
+};
 
 var login = function () {
 	// var attr = document;
@@ -42,7 +47,6 @@ var login = function () {
 	$("#tab").append(helloStr);
 };
 
-<<<<<<< Updated upstream
 var helloStr = '<li class="dropdown">'
 						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>'
 						+		'<ul class="dropdown-menu">'
@@ -61,10 +65,3 @@ var helloStr = '<li class="dropdown">'
 						+		'</li>';
 
 var temp = helloStr.replace("{myInfo}",'ggy nb');
-=======
-var relogin = function(){
-  $(document).ready(function(){
-		window.location.href = "./login";
-	});
-};
->>>>>>> Stashed changes
