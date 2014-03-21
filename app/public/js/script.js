@@ -4,18 +4,15 @@
 var register = function () {
 
 	// get elements
-	var account = $("#inputaccount").val() 
-		, pwd = $("#inputpassworc").val()
-		, realname = $("#inputrealame").val() 
-		, idnumber = $("#inputidnumber").val()
-		, email = $("#inputemail").val() 
-		, phonenumber = $("#inputphonenumber").val();
+	var account = $("#account").val() 
+		, pwd = $("#inputPassword").val()
+		, confirmpwd = $("#confirmPassword").val()
+		, email = $("#email").val() 
+		, phonenumber = $("#tele").val();
 
 	var postObj = {
 		account : account,
 		password : pwd,
-		realname : realname,
-		id : idnumber,
 		email : email,
 		phonenumber : phonenumber
 	};
@@ -25,10 +22,15 @@ var register = function () {
 			$("#modal-login").val(account);
 			$("#modal-register").val("?");
 		}
-		//alert("this is a signUp");
-		console.log(res);
 	});
+
+	$(document).ready(function(){
+		window.location.href = "./index";
+	});
+		alert("this is a signUp");
+		console.log(res);
 };
+
 
 var login = function () {
 	// var attr = document;
@@ -40,6 +42,7 @@ var login = function () {
 	$("#tab").append(helloStr);
 };
 
+<<<<<<< Updated upstream
 var helloStr = '<li class="dropdown">'
 						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>'
 						+		'<ul class="dropdown-menu">'
@@ -58,3 +61,10 @@ var helloStr = '<li class="dropdown">'
 						+		'</li>';
 
 var temp = helloStr.replace("{myInfo}",'ggy nb');
+=======
+var relogin = function(){
+  $(document).ready(function(){
+		window.location.href = "./login";
+	});
+};
+>>>>>>> Stashed changes
