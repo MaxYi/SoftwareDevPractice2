@@ -57,8 +57,11 @@ module.exports = function (app) {
 		var name = req.parm('account');
 		if (!!name){
 			userCol.findOne({account:name}, function (err, data) {
-				if (err) res.send(err);
-				else console.log(data);
+				if (err) res.send("db error: " + err);
+				else {
+					console.log(data);
+					res.send(200);
+				}
 			});
 		}
 		else res.send("Info wrong");
@@ -83,7 +86,7 @@ module.exports = function (app) {
 
 		if (!!account && !!pwd && !!email && !!tele){
 			userCol.save(user, {safe:true}, function (err) {
-				if (err) res.send(err);
+				if (err) res.send("db error: " + err);
 				else res.send(200);
 			});
 		}
