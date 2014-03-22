@@ -39,6 +39,10 @@ module.exports = function (app) {
 		res.render('adminPanel');
 	});
 
+	app.get('/info', function (req, res) {
+		// body...
+	});
+
 	// post function
 	// For communicate with script in pages
 	/*
@@ -84,6 +88,7 @@ module.exports = function (app) {
 			,	email : email
 			,	phone : tele
 			,	token : ""
+			,	type : 0
 		};
 
 		if (!!account && !!pwd && !!email && !!tele){
@@ -96,10 +101,11 @@ module.exports = function (app) {
 	});
 
 	app.post('/login', function (req, res) {
-		var name = req.param('email')
+		var name = req.param('account')
 			,	pwd = req.param('password');
 
 		var token = uuid.v4()
+			,	expire = 2 * 60 * 60 * 1000  // two hours
 			,	updateObj = {
 				$set : {
 					token : token
@@ -113,15 +119,16 @@ module.exports = function (app) {
 					if (!!data){
 						userCol.update({account:name}, updateObj, function (e) {
 							if (e) res.send("db error: " + e);
-							else res.json({token : token});
+							else{
+								res.cookie('account', name , { maxAge: expire , signed: false });
+								res.cookie('access_token', token , { maxAge: expire , signed: false });
+								res.send(200);
+							}
 						});
 					}
 					else res.send("Failed");
 				}
 			});
 		}
-	});
-
-	app.post('/auth', function (req, res) {
 	});
 };

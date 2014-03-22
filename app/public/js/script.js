@@ -17,6 +17,7 @@ var register = function () {
 		email : email,
 		phonenumber : phonenumber
 	};
+
   if (CheckForm())
   {
 		$.post('/check', {account: account}, function (msg) {
@@ -34,68 +35,53 @@ var register = function () {
   }
 		//alert("this is a signUp");
 		//console.log(res);
-  };
-
-  var jumpto = function(url){
-    $(document).ready(function(){
-			window.location.href = url;
-	  });
-  };
-
-
-  var login = function () {
-	// var attr = document;
-	  var account = $('#inputAccount').val();
-	  var pwd = $('#inputPassword').val();
-
-	  $.post('/login',{account:account,password:pwd},function (data) {
-	  	if (data.state) {
-	  		jumpto('/');
-	  	};
-	});
-	// $.post('/index',{account:account,password:pwd},function (res) {
-	// 	if (res === 200) {
-	// 		$("#modal-login").val(account);
-	// 	  $("#modal-register").val("?");
-	// }
-	// });
-	// $('#loginModal').modal('hide');
-	// $('#register').remove();
-	// $('#modal-login').html("你好，" + account);
-	// $('#modal-login').remove();
-	// $("#tab").append(helloStr);
 };
 
-var helloStr = '<li class="dropdown">'
-						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>'
-						+		'<ul class="dropdown-menu">'
-						+		'<li>'
-						+		'<a href="{myInfo}">我的信息</a>'
-						+		'</li>'
-						+		'<li>'
-						+		'<a href="{enterMS}">进入后台</a>'
-						+		'</li>'
-						+		'<li class="divider">'
-						+		'</li>'
-						+		'<li>'
-						+		'<a href="{logout}">退出</a>'
-						+		'</li>'
-						+		'</ul>'
-						+		'</li>';
+var jumpto = function(url){
+  $(document).ready(function(){
+		window.location.href = url;
+  });
+};
 
-var temp1 = helloStr.replace("{myInfo}",'/myInfo');
-var temp2 = helloStr.replace("{enterMS}",'/adminPanel');
-var temp3 = helloStr.replace("{logout}",'/index');
 
- $(document).ready(function(){
-    updateView();
- });
+var login = function () {
+// var attr = document;
+  var account = $('#inputAccount').val();
+  var pwd = $('#inputPassword').val();
+
+  $.post('/login',{account:account,password:pwd},function (data) {
+  	if (data === "OK") {
+  		jumpto('/');
+  	}
+  	else alert("用户名或密码错误");
+	});
+};
+
+var logout = function ()
+{
+	if($.cookie('access_token')){
+		$.removeCookie('account');
+		$.removeCookie('access_token');
+		location.reload();
+	}
+}
+
+$(document).ready(function(){
+  updateView();
+  window.setTimeout(function(){location.reload()},7199999);
+});
 
 var updateView =function(){
+	var name = $.cookie('account');
+
+	var dropDown = helloStr.replace("{account}",name);
+
   if ($.cookie('access_token'))
   {
-  	$("#modal-login").val($.cookie('account'));
-		$("#modal-register").val("myInfo");
+  	// delete login and register tab
+  	$("#modal-login").remove();
+		$("#modal-register").remove();
+		$("#tab").append(dropDown);
   }
 };
 
@@ -177,3 +163,20 @@ var checkname = function(){
   	else alert('该用户名已被注册');
 	});
 }
+
+var helloStr = '<li class="dropdown">'
+						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">你好，{account}<strong class="caret"></strong></a>'
+						+		'<ul class="dropdown-menu">'
+						+		'<li>'
+						+		'<a href="/info">我的信息</a>'
+						+		'</li>'
+						+		'<li>'
+						+		'<a href="/admin">进入后台</a>'
+						+		'</li>'
+						+		'<li class="divider">'
+						+		'</li>'
+						+		'<li>'
+						+		'<a href="javascript:void(0);" onclick="logout()">注销</a>'
+						+		'</li>'
+						+		'</ul>'
+						+		'</li>';
