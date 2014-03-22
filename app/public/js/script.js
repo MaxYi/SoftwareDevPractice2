@@ -104,42 +104,42 @@ var updateView =function(){
 var CheckForm = function(){
   if ( $("#account").val().length == 0) {
 		alert("请输入您的用户名");
-		//document.registeForm.userName.focus();
+		$("#account").focus();
 		return false;
 	}
 	if (($("#account").val().length > 14) || ($("#account").val().length < 5)) {
 		alert("用户名长度不符合要求");
-		//document.registeForm.userName.focus();
+		$("#account").focus();
 		return false;
 	}
 	if ($("#account").val().indexOf("<")!=-1 || $("#account").val().indexOf(">")!=-1){
 		alert("用户名中只能是英文字母或者数字，不能是中文");
-		//document.registeForm.userName.focus();
+		$("#account").focus();
 		return false;
 	}
 	if ($("#account").val().indexOf("'")!=-1){
 		alert("用户名中不能包含 (') ");
-		//document.registeForm.userName.focus();
+		$("#account").focus();
 		return false;
 	}
 	if ($("#inputPassword").val().length == 0) {
 		alert("请输入您的密码");
-		//document.registeForm.userPassword.focus();
+		$("#inputPassword").focus();
 		return false;
 	}
 	if (($("#inputPassword").val().length < 6) || ($("#inputPassword").val().length > 14)) {
 		alert("密码长度不合适");
-		//document.registeForm.userPassword.focus();
+		$("#inputPassword").focus();
 		return false;
 	}
 		if ($("#confirmPassword").val().length == 0) {
 		alert("请确认您的密码");
-		//document.registeForm.repassword.focus();
+		$("#confirmPassword").focus();
 		return false;
 	}
 	if ($("#inputPassword").val() != $("#confirmPassword").val()) {
 		alert("您两次输入的密码不一样！请重新输入");
-		//document.registeForm.userPassword.focus();
+		$("#inputPassword").focus();
 		return false;
 	}
 	// if (document.registeForm.checkNum.value == "") {
@@ -149,22 +149,22 @@ var CheckForm = function(){
 	// }
 	if ($("#tele").val().length == 0) {
 		alert("请输入您的手机号码");
-		//document.registeForm.userEmail.focus();
+		$("#tele").focus();
 		return false;
 	}
 	if (($("#tele").val().length !=11) || (isNaN($("#tele").val()))){
 		alert("手机号码格式不正确");
-		//document.registeForm.userEmail.focus();
+		$("#tele").focus();
 		return false;
 	}
 	if ($("#email").val() .length == 0) {
 		alert("请输入您的Email");
-		//document.registeForm.userEmail.focus();
+		$("#email").focus();
 		return false;
 	}
 		if ($("#email").val() .length > 0 && !$("#email").val() .match( /^.+@.+$/ ) ) {
 		alert("Email 错误！请重新输入");
-		//document.registeForm.userEmail.focus();
+		$("#email").focus();
 		return false;
 	}
 	return true;

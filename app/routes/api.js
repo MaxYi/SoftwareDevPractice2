@@ -59,8 +59,10 @@ module.exports = function (app) {
 			userCol.findOne({account:name}, function (err, data) {
 				if (err) res.send("db error: " + err);
 				else {
-					console.log(data);
-					res.send(200);
+					if (!!data){
+						res.send("This name has been registered");
+					}
+					else res.send(200);
 				}
 			});
 		}
