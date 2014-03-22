@@ -15,9 +15,9 @@ mongoClient.init = function(app) {
 		dbcfg.port = dbcfg.port || 27017;
 		var uri;
 		if( dbcfg.user && dbcfg.passwd ){
-			uri = format("mongodb://%s:%s@%s:%s/?auto_reconnect=true", dbcfg.user, dbcfg.passwd, dbcfg.host, dbcfg.port);
+			uri = format("mongodb://%s:%s@%s:%s/%s", dbcfg.user, dbcfg.passwd, dbcfg.host, dbcfg.port, dbcfg.db);
 		}else{
-			uri = format("mongodb://%s:%s/?auto_reconnect=true", dbcfg.host, dbcfg.port);
+			uri = format("mongodb://%s:%s/%s", dbcfg.host, dbcfg.port, dbcfg.db);
 		}
 		var dbopt = { database: dbcfg.db, safe: true };
 		_client = mongoskin.db(uri, dbopt);

@@ -11,7 +11,7 @@ function commonConfig (app) {
 	var dbcfg = {
 			host: "127.0.0.1"
 		,	port: "27017"
-		,	db: "SDP2"
+		,	db: "sdp2"
 	};
 
 	app.set('dbcfg', dbcfg);
@@ -24,12 +24,12 @@ function commonConfig (app) {
 
 	// ensure index
 	dbclient.collection('user')
-	.ensureIndex({uid: 1}, {unique: true, dropdups: true, safe: true }, function (err) {
+	.ensureIndex({account: 1}, {unique: true, dropdups: true, safe: true }, function (err) {
 		if (err) console.error('ensureIndex error:' + err && err.stack);
 	});
 
 	dbclient.collection('profile')
-	.ensureIndex({uid: 1}, {unique: true, dropdups: true, safe: true }, function (err) {
+	.ensureIndex({account: 1}, {unique: true, dropdups: true, safe: true }, function (err) {
 		if (err) console.error('ensureIndex error:' + err && err.stack);
 	});
 

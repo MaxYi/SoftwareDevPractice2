@@ -23,7 +23,7 @@ var register = function () {
 		  if (msg === "OK"){
 			  $.post('/register',postObj,function (data) {
 				  if (data === 'OK') {
-					  jumpto('index');
+					  jumpto('/');
 				  }
 				  else {
 				  }
@@ -38,7 +38,7 @@ var register = function () {
 
   var jumpto = function(url){
     $(document).ready(function(){
-			window.location.href = "./"+url;
+			window.location.href = url;
 	  });
   };
 
@@ -50,9 +50,7 @@ var register = function () {
 
 	  $.post('/login',{account:account,password:pwd},function (data) {
 	  	if (data.state) {
-         $(document).ready(function(){
-			   window.location.href = "./index";
-		  });
+	  		jumpto('/');
 	  	};
 	});
 	// $.post('/index',{account:account,password:pwd},function (res) {
