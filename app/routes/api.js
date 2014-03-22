@@ -116,7 +116,7 @@ module.exports = function (app) {
 							else res.json({token : token});
 						});
 					}
-					else res.send("No this account");
+					else res.send("Failed");
 				}
 			});
 		}
