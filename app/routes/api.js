@@ -54,6 +54,14 @@ module.exports = function (app) {
 	 * check the name of account is unique
 	 */
 	app.post('/check', function (req, res) {
+		var name = req.parm('account');
+		if (!!name){
+			userCol.findOne({account:name}, function (err, data) {
+				if (err) res.send(err);
+				else console.log(data);
+			});
+		}
+		else res.send("Info wrong");
 	});
 
 	/**
@@ -75,7 +83,8 @@ module.exports = function (app) {
 
 		if (!!account && !!pwd && !!email && !!tele){
 			userCol.save(user, {safe:true}, function (err) {
-				res.send(200);
+				if (err) res.send(err);
+				else res.send(200);
 			});
 		}
 		else res.send("Info wrong");
