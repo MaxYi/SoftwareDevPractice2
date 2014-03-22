@@ -48,10 +48,23 @@ var register = function () {
 	  var account = $('#inputAccount').val();
 	  var pwd = $('#inputPassword').val();
 
+	  if ( $('#inputAccount').val().length == 0) {
+		  alert("请输入您的用户名");
+		  $('#inputAccount').focus();
+	  }
+	  if ($('#inputPassword').val().length == 0) {
+		alert("请输入您的密码");
+		$('#inputPassword').focus();
+	  }
+	 
+
 	  $.post('/login',{account:account,password:pwd},function (data) {
 	  	if (data.state) {
 	  		jumpto('/');
 	  	};
+	  	else{
+	  		alert("用户名或密码错误");
+	  	}
 	});
 	// $.post('/index',{account:account,password:pwd},function (res) {
 	// 	if (res === 200) {
