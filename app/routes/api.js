@@ -96,11 +96,30 @@ module.exports = function (app) {
 	});
 
 	app.post('/login', function (req, res) {
-		var account = req.param('email')
+		var name = req.param('email')
 			,	pwd = req.param('password');
 
-		console.log(account,pwd);
-		res.send('login');
+		var token = uuid.v4()
+			,	updateObj = {
+				$set : {
+					token : token
+				}
+			};
+
+		if (!!name && !!pwd){
+			userCol.findOne({account:name, password:pwd}, function (err, data) {
+				if (err) res.send("db error: " + err);
+				else {
+					if (!!data){
+						userCol.update({account:name}, updateObj, function (e) {
+							if (e) res.send("db error: " + e);
+							else res.json({token : token});
+						});
+					}
+					else res.send("No this account");
+				}
+			});
+		}
 	});
 
 	app.post('/auth', function (req, res) {
