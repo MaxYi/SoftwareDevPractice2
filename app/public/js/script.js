@@ -32,7 +32,7 @@ var register = function () {
 
   var jumpto = function(url){
     $(document).ready(function(){
-		window.location.href = "./"+url.text();
+			window.location.href = "./"+url;
 	  });
   };
 

@@ -2,7 +2,10 @@
  * api route
  * @author Qian Yi
  */
+var uuid = require('../utils/uuid');
+
 module.exports = function (app) {
+
 	var dbclient = app.get('dbclient');
 
 	var userCol = dbclient.collection('user');
@@ -13,21 +16,69 @@ module.exports = function (app) {
 		// res.send("respond with a resource");
 	};
 
+	// GET FUNCTION
+	// Just get pages in browser
+	/*
+	 ######   ######## ######## 
+	##    ##  ##          ##    
+	##        ##          ##    
+	##   #### ######      ##    
+	##    ##  ##          ##    
+	##    ##  ##          ##    
+	 ######   ########    ##  
+	 */
 	app.get('/register', function (req, res) {
-		// TODO db link
-		// ......
-		// if (true) {
-		// 	res.send(token);
-		// }
 	  res.render('register', { title: '工程硕士网上报名注册' });
+	});
+
+	app.get('/login', function (req, res) {
+		res.render('login');
 	});
 
 	app.get('/admin', function (req, res) {
 		res.render('adminPanel');
 	});
 
-	app.get('/login', function (req, res) {
-		res.render('login');
+	// post function
+	// For communicate with script in pages
+	/*
+	########   #######   ######  ######## 
+	##     ## ##     ## ##    ##    ##    
+	##     ## ##     ## ##          ##    
+	########  ##     ##  ######     ##    
+	##        ##     ##       ##    ##    
+	##        ##     ## ##    ##    ##    
+	##         #######   ######     ##    
+	 */
+	/**
+	 * check the name of account is unique
+	 */
+	app.post('/check', function (req, res) {
+	});
+
+	/**
+	 * for user register
+	 */
+	app.post('/register', function (req, res) {
+		var account = req.param('account')
+			,	pwd = req.param('password')
+			,	email = req.param('email')
+			,	tele = req.param('phonenumber');
+
+		var user = {
+				account : account
+			,	password : pwd
+			,	email : email
+			,	phone : tele
+			,	token : ""
+		};
+
+		if (!!account && !!pwd && !!email && !!tele){
+			userCol.save(user, {safe:true}, function (err) {
+				res.send(200);
+			});
+		}
+		else res.send("Info wrong");
 	});
 
 	app.post('/login', function (req, res) {
@@ -36,5 +87,8 @@ module.exports = function (app) {
 
 		console.log(account,pwd);
 		res.send('login');
+	});
+
+	app.post('/auth', function (req, res) {
 	});
 };
