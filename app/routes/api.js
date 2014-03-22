@@ -54,7 +54,7 @@ module.exports = function (app) {
 	 * check the name of account is unique
 	 */
 	app.post('/check', function (req, res) {
-		var name = req.parm('account');
+		var name = req.param('account');
 		if (!!name){
 			userCol.findOne({account:name}, function (err, data) {
 				if (err) res.send("db error: " + err);
