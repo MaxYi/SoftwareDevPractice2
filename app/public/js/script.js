@@ -1,7 +1,6 @@
 /**
  * @author GuGeyi
  */
-var IS_NAME_SAME = true; 
 
 var register = function () {
 
@@ -20,18 +19,18 @@ var register = function () {
 	};
   if (CheckForm())
   {
-  	if (!IS_NAME_SAME){
-		  $.post('/register',postObj,function (dataw) {
-			  if (data.state) {
-				  jumpto('index');
-			  }
-			  else {
-			  }
-		  });
-		}
-		else{
-			alert("该用户名已被注册");
-		}
+		$.post('/check', {account: account}, function (msg) {
+		  if (msg === "OK"){
+			  $.post('/register',postObj,function (data) {
+				  if (data === 'OK') {
+					  jumpto('index');
+				  }
+				  else {
+				  }
+			  });
+	  	}
+	  	else alert('该用户名已被注册');
+		});
   }
 		//alert("this is a signUp");
 		//console.log(res);
@@ -175,10 +174,8 @@ var checkname = function(){
 	var account = $("#account").val();
 	$.post('/check', {account: account}, function(data) {
 	  if (data === "OK"){
-	  	IS_NAME_SAME = false;
 	  	alert("此用户名可用");
   	}
-	  else
-	  	IS_NAME_SAME = true;
+  	else alert('该用户名已被注册');
 	});
 }
