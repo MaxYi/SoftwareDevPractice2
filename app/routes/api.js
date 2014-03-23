@@ -35,24 +35,6 @@ module.exports = function (app) {
 		res.render('login');
 	});
 
-	app.get('/admin', function (req, res) {
-		var name = req.param('account')
-			,	token = req.param('token');
-
-		if (!!name && !!token){
-			userCol.findOne({account:name, token:token}, function (err, data) {
-				if (err) res.send("db error: " + err);
-				else {
-					if (!!data){
-						res.render('adminPanel');
-					}
-					else res.render('login');
-				}
-			});
-		}
-		else res.render('login');
-	});
-
 	// post function
 	// For communicate with script in pages
 	/*
@@ -140,5 +122,23 @@ module.exports = function (app) {
 				}
 			});
 		}
+	});
+
+	app.post('/admin', function (req, res) {
+		var name = req.param('account')
+			,	token = req.param('token');
+
+		if (!!name && !!token){
+			userCol.findOne({account:name, token:token}, function (err, data) {
+				if (err) res.send("db error: " + err);
+				else {
+					if (!!data){
+						res.render('adminPanel');
+					}
+					else res.render('login');
+				}
+			});
+		}
+		else res.render('login');
 	});
 };
