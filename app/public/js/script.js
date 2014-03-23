@@ -44,25 +44,6 @@ var jumpto = function(url){
   });
 };
 
-var myInfo = function(){
-	var token = $.cookie('token');
-	var account = $.cookie('account');
-	$.post('/admin', {account: account,token: token}, function (msg) {
-		if (msg === 'OK')
-		jumpto('adminPanel');
-	  //TODO update backstage information
-	});
-};
-
-var backstage = function(){
-	var token = $.cookie('token');
-	var account = $.cookie('account');
-	$.get('/admin',{token:token,account:account},function (res) {
-  //
-  if (res === 'OK')
-		jumpto('adminPanel');
-	}
-}
 var login = function () {
 // var attr = document;
   var account = $('#inputAccount').val();
@@ -109,6 +90,11 @@ var updateView =function(){
 
   if ($.cookie('access_token'))
   {
+  	// deal data
+		var token = $.cookie('access_token')
+			,	url = "account=" + name + "&" + "token=" + token;
+		dropDown = dropDown.replace("{getStr}", url);
+
   	// delete login and register tab
   	$("#modal-login").remove();
 		$("#modal-register").remove();
@@ -199,10 +185,10 @@ var helloStr = '<li class="dropdown">'
 						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">你好，{account}<strong class="caret"></strong></a>'
 						+		'<ul class="dropdown-menu">'
 						+		'<li>'
-						+		'<a href="javascript:void(0);" onclick="myInfo()">我的信息</a>'
+						+		'<a href="/admin">我的信息</a>'
 						+		'</li>'
 						+		'<li>'
-						+		'<a href="javascript:void(0);" onclick="backstage()">进入后台</a>'
+						+		'<a href="/admin?{getStr}">进入后台</a>'
 						+		'</li>'
 						+		'<li class="divider">'
 						+		'</li>'
