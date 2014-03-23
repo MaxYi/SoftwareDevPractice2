@@ -57,7 +57,7 @@ var myInfo = function(){
 var backstage = function(){
 	var token = $.cookie('token');
 	var account = $.cookie('account');
-	$.get('/admin',function (res) {
+	$.get('/admin',{token:token,account:account},function (res) {
   //
   if (res === 'OK')
 		jumpto('adminPanel');
