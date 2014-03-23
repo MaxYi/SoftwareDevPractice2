@@ -1,4 +1,4 @@
-/**
+	/**
  * @author GuGeyi
  */
 
@@ -25,6 +25,7 @@ var register = function () {
 			  $.post('/register',postObj,function (data) {
 				  if (data === 'OK') {
 					  jumpto('/');
+					  login();
 				  }
 				  else {
 				  }
@@ -43,7 +44,21 @@ var jumpto = function(url){
   });
 };
 
+var myInfo = function(){
+	var token = $.cookie('token');
+	var account = $.cookie('account');
+	$.post('/admin', {account: account,token: token}, function (msg) {
+		jumpto('adminPanel');
 
+	});
+};
+
+var backstage = function(){
+	var token = $.cookie('token');
+	var account = $.cookie('account');
+	$.get('/admin',function (req, res) {
+	}
+}
 var login = function () {
 // var attr = document;
   var account = $('#inputAccount').val();
@@ -180,10 +195,10 @@ var helloStr = '<li class="dropdown">'
 						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">你好，{account}<strong class="caret"></strong></a>'
 						+		'<ul class="dropdown-menu">'
 						+		'<li>'
-						+		'<a href="/info">我的信息</a>'
+						+		'<a href="javascript:void(0);" onclick="myInfo()">我的信息</a>'
 						+		'</li>'
 						+		'<li>'
-						+		'<a href="/admin">进入后台</a>'
+						+		'<a href="javascript:void(0);" onclick="backstage()">进入后台</a>'
 						+		'</li>'
 						+		'<li class="divider">'
 						+		'</li>'
