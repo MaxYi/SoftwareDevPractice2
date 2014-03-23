@@ -48,8 +48,9 @@ var myInfo = function(){
 	var token = $.cookie('token');
 	var account = $.cookie('account');
 	$.post('/admin', {account: account,token: token}, function (msg) {
+		if (msg === 'OK')
 		jumpto('adminPanel');
-
+	  //TODO update backstage information
 	});
 };
 
@@ -57,6 +58,7 @@ var backstage = function(){
 	var token = $.cookie('token');
 	var account = $.cookie('account');
 	$.get('/admin',function (req, res) {
+
 	}
 }
 var login = function () {
