@@ -36,11 +36,21 @@ module.exports = function (app) {
 	});
 
 	app.get('/admin', function (req, res) {
-		res.render('adminPanel');
-	});
+		var name = req.param('account')
+			,	token = req.param('token');
 
-	app.get('/info', function (req, res) {
-		// body...
+		if (!!name && !!token){
+			userCol.findOne({account:name, token:token}, function (err, data) {
+				if (err) res.send("db error: " + err);
+				else {
+					if (!!data){
+						res.render('adminPanel');
+					}
+					else res.render('login');
+				}
+			});
+		}
+		else res.render('login');
 	});
 
 	// post function
