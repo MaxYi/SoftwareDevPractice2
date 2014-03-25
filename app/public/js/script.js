@@ -2,6 +2,8 @@
  * @author GuGeyi
  */
 
+var _PROFILE = {};
+
 var register = function () {
 
 	// get elements
@@ -69,6 +71,19 @@ var login = function () {
 	});
 };
 
+var upload = function () {
+	var alert = info_tpl.replace("{alterText}", "上传成功");
+	$('#btn-upload').after(alert);
+	window.setTimeout(fade(),1000);
+	$('#form_info').submit();
+};
+
+var fade = function () {
+	return function () {
+		$("#alert").toggle("slow");
+	}
+};
+
 var logout = function ()
 {
 	if($.cookie('access_token')){
@@ -76,7 +91,7 @@ var logout = function ()
 		$.removeCookie('access_token');
 		location.reload();
 	}
-}
+};
 
 $(document).ready(function(){
   updateView();
@@ -197,3 +212,8 @@ var helloStr = '<li class="dropdown">'
 						+		'</li>'
 						+		'</ul>'
 						+		'</li>';
+
+var info_tpl = 	'<div class="alert alert-info"  align="center" id="alert" style="width:50px">'
+			+	'<button class="close" data-dismiss="alert" type="button">×</button>'
+			+	'<strong>{alterText}</strong>'
+			+	'</div>';

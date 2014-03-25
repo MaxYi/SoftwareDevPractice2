@@ -2,7 +2,13 @@
  * api route
  * @author Qian Yi
  */
+var fs = require('fs');
+
 var uuid = require('../utils/uuid');
+var _ = require('../utils/underscore');
+var officegen = require('officegen');
+var docx = officegen ( 'docx' );
+var xlsx = officegen ( 'xlsx' );
 
 module.exports = function (app) {
 
@@ -140,5 +146,19 @@ module.exports = function (app) {
 				}
 			});
 		}
+	});
+
+	app.post('/upload', function (req, res) {
+		var account = req.cookies.account
+			,	token = req.cookies.access_token
+			,	url = '/admin?account=' + account + '&token=' + token;
+
+		var obj = _.extend({account:account}, req.body);
+		console.log(obj);
+
+		var pic_path = req.files.pic.path;
+	  console.log(pic_path, req.files);
+
+	  res.location('/');
 	});
 };

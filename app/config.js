@@ -59,6 +59,7 @@ exports.appConfig = function (app) {
 
 	app.use(express.static(path.join(__dirname, '/public')));
 	app.use(express.methodOverride());
+	app.use(express.bodyParser({uploadDir:'./public/res/user'}));
 	app.use(express.cookieParser('signed'));
 	// app router
 	app.use(app.router);
