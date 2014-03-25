@@ -72,12 +72,111 @@ var login = function () {
 };
 
 var upload = function () {
-	var alert = info_tpl.replace("{alterText}", "上传成功");
-	$('#btn-upload').after(alert);
-	window.setTimeout(fade(),1000);
-	$('#form_info').submit();
+	if (uploadCheck())
+	{
+		var alert = info_tpl.replace("{alterText}", "上传成功");
+		$('#btn-upload').after(alert);
+		window.setTimeout(fade(),1000);
+		$('#form_info').submit();
+  };
 };
 
+var uploadCheck = function() {
+	if ( $('#input_name').val().length == 0) {
+	  alert("请输入真实姓名");
+	  $('#input_name').focus();
+	  return false;
+  };
+  if ( $('#input_id').val().length == 0) {
+	  alert("请输入身份证号码");
+	  $('#input_id').focus();
+	  return false;
+  };
+  if ( !$('#input_birth').val()) {
+	  alert("请输入出生年月");
+	  $('#input_birth').focus();
+	  return false;
+  };
+  if ( $('#input_nation').val().length == 0) {
+	  alert("请输入民族");
+	  $('#input_nation').focus();
+	  return false;
+  };
+  if ( $('#input_workPlace').val().length == 0) {
+	  alert("请输入工作单位");
+	  $('#input_workPlace').focus();
+	  return false;
+  };
+  if ( $('#input_gra_college').val().length == 0) {
+	  alert("请输入毕业院校");
+	  $('#input_gra_college').focus();
+	  return false;
+  };
+  if ( $('#input_gra_major').val().length == 0) {
+	  alert("请输入毕业专业");
+	  $('#input_gra_major').focus();
+	  return false;
+  };
+  if ( !$('#input_gra_time').val()) {
+	  alert("请输入毕业时间");
+	  $('#input_gra_time').focus();
+	  return false;
+  };
+  if ( $('#input_gra_num').val().length == 0) {
+	  alert("请输入毕业编号");
+	  $('#input_gra_num').focus();
+	  return false;
+  };
+  if ( !$('#input_degree_time').val()) {
+	  alert("请输入学位时间");
+	  $('#input_degree_time').focus();
+	  return false;
+  };
+  if ( $('#input_degree_num').val().length == 0) {
+	  alert("请输入学位编号");
+	  $('#input_degree_num').focus();
+	  return false;
+  };
+  if ( $('#input_location').val().length == 0) {
+	  alert("请输入所在地区");
+	  $('#input_location').focus();
+	  return false;
+  };
+  if ( $('#input_pic').val().length == 0) {
+	  alert("请上传照片");
+	  $('#input_pic').focus();
+	  return false;
+  };
+  if ( $('#input_pic').val().length == 0) {
+	  alert("请上传照片");
+	  $('#input_pic').focus();
+	  return false;
+  };
+  var filepath = $('#input_pic').val();
+  //为了避免转义反斜杠出问题，这里将对其进行转换
+   var re = /(\\+)/g; 
+	var filename=filepath.replace(re,"#");
+	//对路径字符串进行剪切截取
+	var one=filename.split("#");
+	//获取数组中最后一个，即文件名
+	var two=one[one.length-1];
+	//再对文件名进行截取，以取得后缀名
+	var three=two.split(".");
+	 //获取截取的最后一个字符串，即为后缀名
+	var last=three[three.length-1];
+	//添加需要判断的后缀名类型
+	var tp ="jpg,gif,bmp,JPG,GIF,BMP";
+	//返回符合条件的后缀名在字符串中的位置
+	var rs=tp.indexOf(last);
+	//如果返回的结果大于或等于0，说明包含允许上传的文件类型
+	if(rs>=0){
+	 return true;
+	}
+	else{
+	 alert("您选择的上传文件不是有效的图片文件！");
+	 return false;
+	 }
+};
 var fade = function () {
 	return function () {
 		$("#alert").toggle("slow");
