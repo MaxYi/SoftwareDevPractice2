@@ -249,6 +249,9 @@ $(document).ready(function(){
 });
 
 var updateStudentView = function(){
+};
+
+var updateVisiterView = function(){
 	$("#ico1").remove();
 	$("#ico2").remove();
 	$("#ico6").remove();
@@ -257,9 +260,6 @@ var updateStudentView = function(){
 	$("#ico5_s").html("报名");
 	$("#ico4_s").html("缴费");
 	$("#ico7_s").html("考试相关");
-};
-
-var updateVisiterView = function(){
 };
 
 var updateFyszView = function(){
@@ -276,7 +276,7 @@ var updateYszView = function(){
 	$("#ico7_s").html("录入");
 };
 
-
+var fillInfo
 var updateView =function(){
 	var name = $.cookie('account');
 
