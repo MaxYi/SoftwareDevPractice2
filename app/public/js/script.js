@@ -250,10 +250,13 @@ $(document).ready(function(){
 
 var updateStudentView = function(){
 	$("#ico1").remove();
-	$("#ico3_s").attr("span","asdjoiasjd");
 	$("#ico2").remove();
 	$("#ico6").remove();
 	$("#ico8").remove();
+	$("#ico3_s").html("我的信息");
+	$("#ico5_s").html("报名");
+	$("#ico4_s").html("缴费");
+	$("#ico7_s").html("考试相关");
 };
 
 var updateVisiterView = function(){
@@ -263,6 +266,14 @@ var updateFyszView = function(){
 };
 
 var updateYszView = function(){
+	$("#ico2").remove();
+	$("#ico3").remove();
+	$("#ico4").remove();	
+	$("#ico6").remove();
+	$("#ico8").remove();
+	$("#ico5_s").html("招生");
+	$("#ico1_s").html("审核");
+	$("#ico7_s").html("录入");
 };
 
 
