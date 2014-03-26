@@ -167,10 +167,7 @@ module.exports = function (app) {
 					else{
 						fs.rename(pic_path, file, function(e) {
 				      if (e) throw e;
-				      fs.unlink(pic_path, function(error) {
-				        if (error) throw error;
-							  cb(null, true);
-				      });
+				      else cb(null, true);
 				    });
 					}
 				});
@@ -179,7 +176,7 @@ module.exports = function (app) {
 			function (cb) {
 				var obj = _.extend({account:account, pic_name:req.files.pic.name}, req.body);
 				profileCol.findOne({account:account}, function (e, data) {
-					if (err) console.error("db error: " + err);
+					if (e) console.error("db error: " + e);
 					else if (!data){
 						profileCol.save(obj, {safe:true}, function (err) {
 							if (err) console.error("db error: " + err);
@@ -194,7 +191,8 @@ module.exports = function (app) {
 						});
 					}
 				});
-			}],function (err) {
+			}],
+			function (err) {
 				if (err) res.send("async error: " + err);
 				else res.send('<script>history.back(-1);</script>');
 		});
