@@ -293,8 +293,8 @@ form,fieldset{
 .buttons .active .ico7 span {background-position:-4px -352px;}
 .buttons .ico8 span {background-position:-4px -380px;}
 .buttons .active .ico8 span {background-position:-4px -415px;}
-.buttons li:hover .tooltip {display:block;}
-.buttons .tooltip {
+.buttons li:hover .tooltipAll {display:block;}
+.buttons .tooltipAll {
 	position:absolute;
 	left:61px;
 	top:9px;
@@ -305,7 +305,7 @@ form,fieldset{
 	display:none;
 	white-space:nowrap;
 }
-.buttons .tooltip span {
+.buttons .tooltipAll span {
 	height:20px;
 	float:left;
 	padding:4px 3px 0 10px;

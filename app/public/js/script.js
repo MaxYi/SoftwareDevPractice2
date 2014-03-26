@@ -1,15 +1,14 @@
 	/**
- * @author GuGeyi
+ * @author GuGeyi & Qian Yi
  */
 
 var _PROFILE = {};
 
 var ACCOUNT_TYPE = {
-	visitor ：0,
-	student : 1,
-  edu_administration : 2,
-  fysz : 3,
-  ysz : 4
+		visitor : 0
+	,	student : 1
+	,	fysz : 2
+	,	ysz : 3
 };
 
 var CURRENT_ACOUNT_TYPE = {};
@@ -45,7 +44,7 @@ var register = function () {
 	  	}
 	  	else alert('该用户名已被注册');
 		});
-  };
+  }
 		//alert("this is a signUp");
 		//console.log(res);
 };
@@ -62,8 +61,8 @@ var jumpto = function(url){
 
 var EnsureAccountType = function(){
 	var account = $('#inputAccount').val();
-  var r = /,1(?=,)|,1$/g;  //替换其他数字需要把两个数字都改，如 var r = /,3(?=,)|,3$/g;
-  var b = account.replace(r,"");
+  var reg = /,1(?=,)|,1$/g;  //替换其他数字需要把两个数字都改，如 var r = /,3(?=,)|,3$/g;
+  var b = account.replace(reg,"");
   switch(b)
   {
 		case "student":
@@ -80,11 +79,11 @@ var EnsureAccountType = function(){
 	}
 	return CURRENT_ACCOUNT_TYPE;
 };
+
 var login = function () {
 // var attr = document;
   var account = $('#inputAccount').val();
   var pwd = $('#inputPassword').val();
-  
 
   if ( $('#inputAccount').val().length == 0) {
 	  alert("请输入您的用户名");
@@ -109,7 +108,7 @@ var upload = function () {
 	if (uploadCheck())
 	{
 		var alert = info_tpl.replace("{alterText}", "上传成功");
-		$('#btn-upload').after(alert);
+		$('#div-upload').append(alert);
 		window.setTimeout(fade(),1000);
 		$('#form_info').submit();
   };
@@ -211,6 +210,7 @@ var uploadCheck = function() {
 	 return false;
 	 }
 };
+
 var fade = function () {
 	return function () {
 		$("#alert").toggle("slow");
@@ -346,7 +346,6 @@ var helloStr = '<li class="dropdown">'
 						+		'</ul>'
 						+		'</li>';
 
-var info_tpl = 	'<div class="alert alert-info"  align="center" id="alert" style="width:50px">'
-			+	'<button class="close" data-dismiss="alert" type="button">×</button>'
+var info_tpl = 	'<div class="alert alert-info" align="center" id="alert">'
 			+	'<strong>{alterText}</strong>'
 			+	'</div>';

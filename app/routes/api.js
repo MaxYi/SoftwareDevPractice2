@@ -3,10 +3,11 @@
  * @author Qian Yi
  */
 var fs = require('fs');
+var officegen = require('officegen');
+var mkdirp = require('mkdirp');
 
 var uuid = require('../utils/uuid');
 var _ = require('../utils/underscore');
-var officegen = require('officegen');
 var docx = officegen ( 'docx' );
 var xlsx = officegen ( 'xlsx' );
 
@@ -150,15 +151,28 @@ module.exports = function (app) {
 
 	app.post('/upload', function (req, res) {
 		var account = req.cookies.account
-			,	token = req.cookies.access_token
-			,	url = '/admin?account=' + account + '&token=' + token;
+			// file path
+			,	path = '../public/res/user/' + account + '/' + req.files.pic.name
+			// get default path
+			, pic_path = req.files.pic.path;
+			
+		mkdirp(path, function (err) {
+			if (err) console.error(err)
+			else{
+				fs.rename(pic_path, path, function(err) {
+		      if (err) throw err;
+		      fs.unlink(pic_path, function() {
+		        if (err) throw err;
+					  res.send('<script>history.back(-1);</script>');
+		      });
+		    });
+			}
+		});
 
 		var obj = _.extend({account:account}, req.body);
 		console.log(obj);
 
-		var pic_path = req.files.pic.path;
-	  console.log(pic_path, req.files);
+		console.log(pic_path, req.files);
 
-	  res.location('/');
 	});
 };
