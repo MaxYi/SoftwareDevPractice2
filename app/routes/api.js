@@ -6,8 +6,24 @@ var fs = require('fs');
 var officegen = require('officegen');
 var mkdirp = require('mkdirp');
 
-var docx = officegen ( 'docx' );
-var xlsx = officegen ( 'xlsx' );
+var docx = officegen ({
+    'type': 'docx',
+    'onend': function( size ){
+      console.log('Finish to create a doc file of ' + size + ' bytes.');
+    },
+    'onerr': function( err ){
+      console.log(err);
+    }
+});
+var xlsx = officegen ({
+    'type': 'xlsx',
+    'onend': function( size ){
+      console.log('Finish to create a excel file of ' + size + ' bytes.');
+    },
+    'onerr': function( err ){
+      console.log(err);
+    }
+});
 
 var uuid = require('../utils/uuid');
 var _ = require('../utils/underscore');
@@ -19,11 +35,6 @@ module.exports = function (app) {
 
 	var userCol = dbclient.collection('user');
 	var profileCol = dbclient.collection('profile');
-
-	var list = function(req, res){
-		res.render('register');
-		// res.send("respond with a resource");
-	};
 
 	// GET FUNCTION
 	// Just get pages in browser
@@ -47,6 +58,13 @@ module.exports = function (app) {
 	app.get('/admin', function (req, res) {
 		var name = req.param('account')
 			,	token = req.param('token');
+
+		// test officegen
+		var out = fs.createWriteStream ('out.doc');
+		docx.generate(out);
+		fs.rename("./out.doc", './public/res/user/'+name+'/out.doc', function(e) {
+      if (e) throw e;
+    });
 
 		if (!!name && !!token){
 			userCol.findOne({account:name, token:token}, function (err, data) {
@@ -195,6 +213,9 @@ module.exports = function (app) {
 						});
 					}
 				});
+			},
+			// gen office
+			function (cb) {
 			}],
 			function (err) {
 				if (err) res.send("async error: " + err);
@@ -210,12 +231,15 @@ module.exports = function (app) {
 			if (err) res.send("db error: " + err);
 			else {
 				if (!!data){
-					profileCol.findOne({account:name}, function (err, data) {
+					profileCol.findOne({account:name}, {_id:0}, function (err, data) {
 						if (err) res.send("db error: " + err);
 						else res.json(data);
 					});
 				}
-				else res.redirect('login');
+				else {
+					var sendObj = {code: 404};
+					res.json(sendObj);
+				}
 			}
 		});
 	});

@@ -230,30 +230,41 @@ var logout = function ()
 };
 
 $(document).ready(function(){
-	var CURRENT_ACCOUNT_TYPE = $.cookie('CURRENT_ACCOUNT_TYPE');
-  switch (CURRENT_ACCOUNT_TYPE){
-  	case '1':
+	var path = location.pathname;
+	switch (path){
+		case '/':{
+			updateView();
+		  window.setTimeout(function(){location.reload()},7199999);
+		  break;
+		}
+		case '/login':{
+			break;
+		}
+		case '/register':{
+			break;
+		}
+		case '/admin':{
+			var CURRENT_ACCOUNT_TYPE = $.cookie('CURRENT_ACCOUNT_TYPE');
+		  switch (CURRENT_ACCOUNT_TYPE){
+		  	case '1':
   				updateStudentView();
   				break;
-  	case '3':
-  				updateYszView();
-  				break;
-  	case '2':
+		  	case '2':
   				updateFyszView();
   				break;
-  	default:
+		  	case '3':
+  				updateYszView();
+  				break;
+		  	default:
   				updateVisiterView();
-  };
-  updateView();
-  window.setTimeout(function(){location.reload()},7199999);
+  				break;
+		  };
+		  break;
+		}
+		default:
+			break;
+	}
 });
-
-var updateStudentView = function(){
-	$("#welcomeText").html("Welcome Student");
-	$("#welcomeText").attr("strong",$.cookie('account'));
-	
-	fillInfo();
-};
 
 var updateVisiterView = function(){
 	$("#ico1").remove();
@@ -264,14 +275,24 @@ var updateVisiterView = function(){
 	$("#ico5_s").html("报名");
 	$("#ico4_s").html("缴费");
 	$("#ico7_s").html("考试相关");
-	$("#welcomeText").html("Welcome Visiter");
-	$("#welcomeText").attr("strong",$.cookie('account'));
+	var welText = $("#welcomeText").html().replace("Welcome","身份： 用户");
+	$("#welcomeText").html(welText);
+	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	fillInfo();
+};
+
+var updateStudentView = function(){
+	var welText = $("#welcomeText").html().replace("Welcome","身份： 学生");
+	$("#welcomeText").html(welText);
+	
 	fillInfo();
 };
 
 var updateFyszView = function(){
-	$("#welcomeText").html("Welcome Fysz");
-	$("#welcomeText").attr("strong",$.cookie('account'));
+	var welText = $("#welcomeText").html().replace("Welcome","身份： 分教务");
+	$("#welcomeText").html(welText);
+	// admin not have name in v1.0
+	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
 };
 
 var updateYszView = function(){
@@ -284,21 +305,27 @@ var updateYszView = function(){
 	$("#ico1_s").html("审核");
 	$("#ico7_s").html("录入");
 
-	$("#welcomeText").html("Welcome Ysz");
-	$("#welcomeText").attr("strong",$.cookie('account'));
+	var welText = $("#welcomeText").html().replace("Welcome","身份： 教务");
+	$("#welcomeText").html(welText);
+	// admin not have name in v1.0
+	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
 };
 
 var fillInfo = function(){
 	var name = $.cookie('account');
 	var token = $.cookie('access_token');
-	$.post('/info',{name:name,token:token},function (data) {
+	$.post('/info',{account:name,token:token},function (data) {
 		if (data.code)
 		{
-			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
+			$("#account_img").attr("src","img/img1.png");
 		}
 		else{
+			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
+			if (!!parseInt($.cookie('CURRENT_ACCOUNT_TYPE'))){
+				$("#welcomeText").find("strong").html("欢迎，" + data.name);
+			}
 			$("#input_name").val(data.name);
-			//$("#input_name").text(data.name);
+			$("#input_sex").find("option:selected").html(data.sex);
 			$("#input_id").val(data.idNum);
 			$("#input_birth").val(data.birth);
 			$("#input_nation").val(data.nation);
@@ -310,13 +337,10 @@ var fillInfo = function(){
 			$("#input_degree_time").val(data.degree_time);
 			$("#input_degree_num").val(data.degree_num);
 			$("#input_location").val(data.location);
-			//$("#input_pic").text(data.pic_name);
-			$("#input_pic").val(data.pic_name);
-			$(".form-control").val(data.sex);
-			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
     }
   });
 };
+
 var updateView =function(){
 	var name = $.cookie('account');
 
