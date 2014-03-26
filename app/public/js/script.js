@@ -4,6 +4,16 @@
 
 var _PROFILE = {};
 
+var ACCOUNT_TYPE = {
+	visitor ：0,
+	student : 1,
+  edu_administration : 2,
+  fysz : 3,
+  ysz : 4
+};
+
+var CURRENT_ACOUNT_TYPE = {};
+
 var register = function () {
 
 	// get elements
@@ -35,7 +45,7 @@ var register = function () {
 	  	}
 	  	else alert('该用户名已被注册');
 		});
-  }
+  };
 		//alert("this is a signUp");
 		//console.log(res);
 };
@@ -46,10 +56,35 @@ var jumpto = function(url){
   });
 };
 
+// var StudentUpdate = function(){	
+// 	//$('#MyInfo').remove();
+// };
+
+var EnsureAccountType = function(){
+	var account = $('#inputAccount').val();
+  var r = /,1(?=,)|,1$/g;  //替换其他数字需要把两个数字都改，如 var r = /,3(?=,)|,3$/g;
+  var b = account.replace(r,"");
+  switch(b)
+  {
+		case "student":
+		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.student;
+		  break;
+		case "fysz":
+		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.fysz;
+		  break;
+		case "ysz":
+		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.ysz;
+		  break;
+		default:
+		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.visitor;
+	}
+	return CURRENT_ACCOUNT_TYPE;
+};
 var login = function () {
 // var attr = document;
   var account = $('#inputAccount').val();
   var pwd = $('#inputPassword').val();
+  
 
   if ( $('#inputAccount').val().length == 0) {
 	  alert("请输入您的用户名");
@@ -59,7 +94,6 @@ var login = function () {
 	alert("请输入您的密码");
 	$('#inputPassword').focus();
   }
-	 
 
   $.post('/login',{account:account,password:pwd},function (data) {
   	if (data === "OK") {
