@@ -11,7 +11,7 @@ var ACCOUNT_TYPE = {
 	,	ysz : 3
 };
 
-var CURRENT_ACOUNT_TYPE = {};
+var CURRENT_ACCOUNT_TYPE;
 
 var register = function () {
 
@@ -60,30 +60,31 @@ var jumpto = function(url){
 // };
 
 var EnsureAccountType = function(){
-	var account = $('#inputAccount').val();
-  var reg = /,1(?=,)|,1$/g;  //替换其他数字需要把两个数字都改，如 var r = /,3(?=,)|,3$/g;
-  var b = account.replace(reg,"");
-  switch(b)
+	var account = $.cookie('account');
+  //var b = account.replace(reg,"");
+  var accountSub = account.substring(0,2);
+  switch(accountSub)
   {
-		case "student":
-		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.student;
+		case "63":
+		  CURRENT_ACCOUNT_TYPE = ACCOUNT_TYPE.student;
 		  break;
-		case "fysz":
-		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.fysz;
+		case "21":
+		  CURRENT_ACCOUNT_TYPE = ACCOUNT_TYPE.fysz;
 		  break;
-		case "ysz":
-		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.ysz;
+		case "20":
+		  CURRENT_ACCOUNT_TYPE = ACCOUNT_TYPE.ysz;
 		  break;
 		default:
-		  CURRENT_ACOUNT_TYPE = ACCOUNT_TYPE.visitor;
-	}
-	return CURRENT_ACCOUNT_TYPE;
+		  CURRENT_ACCOUNT_TYPE = ACCOUNT_TYPE.visitor;
+	};
+  $.cookie('CURRENT_ACCOUNT_TYPE',CURRENT_ACCOUNT_TYPE);
 };
 
 var login = function () {
 // var attr = document;
   var account = $('#inputAccount').val();
   var pwd = $('#inputPassword').val();
+  var accountType = CURRENT_ACCOUNT_TYPE;
 
   if ( $('#inputAccount').val().length == 0) {
 	  alert("请输入您的用户名");
@@ -94,9 +95,11 @@ var login = function () {
 	$('#inputPassword').focus();
   }
 
-  $.post('/login',{account:account,password:pwd},function (data) {
+  $.post('/login',{account:account,password:pwd,accountType:accountType},function (data) {
   	if (data === "OK") {
+  		//set the CURRENT_ACCOUNT_TYPE
   		jumpto('/');
+  		EnsureAccountType();
   	}
   	else{
   		alert("用户名或密码错误");
@@ -198,7 +201,7 @@ var uploadCheck = function() {
 	 //获取截取的最后一个字符串，即为后缀名
 	var last=three[three.length-1];
 	//添加需要判断的后缀名类型
-	var tp ="jpg,gif,bmp,JPG,GIF,BMP";
+	var tp ="jpg,jpeg,JPEG,bmp,JPG,BMP";
 	//返回符合条件的后缀名在字符串中的位置
 	var rs=tp.indexOf(last);
 	//如果返回的结果大于或等于0，说明包含允许上传的文件类型
@@ -227,9 +230,41 @@ var logout = function ()
 };
 
 $(document).ready(function(){
+	var CURRENT_ACCOUNT_TYPE = $.cookie('CURRENT_ACCOUNT_TYPE');
+  switch (CURRENT_ACCOUNT_TYPE){
+  	case '1':
+  				updateStudentView();
+  				break;
+  	case '3':
+  				updateYszView();
+  				break;
+  	case '2':
+  				updateFyszView();
+  				break;
+  	default:
+  				updateVisiterView();
+  };
   updateView();
   window.setTimeout(function(){location.reload()},7199999);
 });
+
+var updateStudentView = function(){
+	$("#ico1").remove();
+	$("#ico3_s").attr("span","asdjoiasjd");
+	$("#ico2").remove();
+	$("#ico6").remove();
+	$("#ico8").remove();
+};
+
+var updateVisiterView = function(){
+};
+
+var updateFyszView = function(){
+};
+
+var updateYszView = function(){
+};
+
 
 var updateView =function(){
 	var name = $.cookie('account');
