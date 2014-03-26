@@ -249,6 +249,10 @@ $(document).ready(function(){
 });
 
 var updateStudentView = function(){
+	$("#welcomeText").html("Welcome Student");
+	$("#welcomeText").attr("strong",$.cookie('account'));
+	
+	fillInfo();
 };
 
 var updateVisiterView = function(){
@@ -260,9 +264,14 @@ var updateVisiterView = function(){
 	$("#ico5_s").html("报名");
 	$("#ico4_s").html("缴费");
 	$("#ico7_s").html("考试相关");
+	$("#welcomeText").html("Welcome Visiter");
+	$("#welcomeText").attr("strong",$.cookie('account'));
+	fillInfo();
 };
 
 var updateFyszView = function(){
+	$("#welcomeText").html("Welcome Fysz");
+	$("#welcomeText").attr("strong",$.cookie('account'));
 };
 
 var updateYszView = function(){
@@ -274,9 +283,40 @@ var updateYszView = function(){
 	$("#ico5_s").html("招生");
 	$("#ico1_s").html("审核");
 	$("#ico7_s").html("录入");
+
+	$("#welcomeText").html("Welcome Ysz");
+	$("#welcomeText").attr("strong",$.cookie('account'));
 };
 
-var fillInfo
+var fillInfo = function(){
+	var name = $.cookie('account');
+	var token = $.cookie('access_token');
+	$.post('/info',{name:name,token:token},function (data) {
+		if (data.code)
+		{
+			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
+		}
+		else{
+			$("#input_name").val(data.name);
+			//$("#input_name").text(data.name);
+			$("#input_id").val(data.idNum);
+			$("#input_birth").val(data.birth);
+			$("#input_nation").val(data.nation);
+			$("#input_workPlace").val(data.workPlace);
+			$("#input_gra_college").val(data.gra_college);
+			$("#input_gra_major").val(data.gra_major);
+			$("#input_gra_time").val(data.gra_time);
+			$("#input_gra_num").val(data.gra_num);
+			$("#input_degree_time").val(data.degree_time);
+			$("#input_degree_num").val(data.degree_num);
+			$("#input_location").val(data.location);
+			//$("#input_pic").text(data.pic_name);
+			$("#input_pic").val(data.pic_name);
+			$(".form-control").val(data.sex);
+			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
+    }
+  });
+};
 var updateView =function(){
 	var name = $.cookie('account');
 
