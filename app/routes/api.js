@@ -174,7 +174,11 @@ module.exports = function (app) {
 			},
 			// db operation
 			function (cb) {
-				var obj = _.extend({account:account, pic_name:req.files.pic.name}, req.body);
+				var o = {
+					account: account,
+					pic_name: req.files.pic.name
+				};
+				var obj = _.extend(o, req.body);
 				profileCol.findOne({account:account}, function (e, data) {
 					if (e) console.error("db error: " + e);
 					else if (!data){
