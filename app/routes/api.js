@@ -6,10 +6,12 @@ var fs = require('fs');
 var officegen = require('officegen');
 var mkdirp = require('mkdirp');
 
-var uuid = require('../utils/uuid');
-var _ = require('../utils/underscore');
 var docx = officegen ( 'docx' );
 var xlsx = officegen ( 'xlsx' );
+
+var uuid = require('../utils/uuid');
+var _ = require('../utils/underscore');
+var async = require('../utils/async');
 
 module.exports = function (app) {
 
@@ -152,27 +154,49 @@ module.exports = function (app) {
 	app.post('/upload', function (req, res) {
 		var account = req.cookies.account
 			// file path
-			,	path = '../public/res/user/' + account + '/' + req.files.pic.name
+			,	path = './public/res/user/' + account
+			,	file = path + '/' + req.files.pic.name
 			// get default path
 			, pic_path = req.files.pic.path;
-			
-		mkdirp(path, function (err) {
-			if (err) console.error(err)
-			else{
-				fs.rename(pic_path, path, function(err) {
-		      if (err) throw err;
-		      fs.unlink(pic_path, function() {
-		        if (err) throw err;
-					  res.send('<script>history.back(-1);</script>');
-		      });
-		    });
-			}
+
+		async.parallel([
+			// rename the file of submit
+			function (cb) {
+				mkdirp(path, function (err) {
+					if (err) console.error(err)
+					else{
+						fs.rename(pic_path, file, function(e) {
+				      if (e) throw e;
+				      fs.unlink(pic_path, function(error) {
+				        if (error) throw error;
+							  cb(null, true);
+				      });
+				    });
+					}
+				});
+			},
+			// db operation
+			function (cb) {
+				var obj = _.extend({account:account, pic_name:req.files.pic.name}, req.body);
+				profileCol.findOne({account:account}, function (e, data) {
+					if (err) console.error("db error: " + err);
+					else if (!data){
+						profileCol.save(obj, {safe:true}, function (err) {
+							if (err) console.error("db error: " + err);
+							else cb(null);
+						});
+					}
+					else{
+						var updateObj = {$set: obj};
+						profileCol.update({account:account}, updateObj, function (err) {
+							if (err) console.error("db error: " + err);
+							else cb(null);
+						});
+					}
+				});
+			}],function (err) {
+				if (err) res.send("async error: " + err);
+				else res.send('<script>history.back(-1);</script>');
 		});
-
-		var obj = _.extend({account:account}, req.body);
-		console.log(obj);
-
-		console.log(pic_path, req.files);
-
 	});
 };
