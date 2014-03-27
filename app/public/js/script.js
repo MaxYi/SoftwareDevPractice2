@@ -276,7 +276,8 @@ var isPaid = function(){
 		if (data.isPaid)
 		{
 	      $("#payButton").remove();
-	      
+	      $("#payLabel").remove();
+	      $("#payH1").append(payInfo);
 		}
 	  });
 }
@@ -356,21 +357,12 @@ var fillInfo = function(){
 };
 
 var originDownload = function(){
-	   var accont = $.cookie('account');
-	   var fileId = "origin";
-	   var token = $.cookie('access_token');
-     $.get('/download/file',{account:account,token:token,fileId:fileId},function (data) {
-
-     });
+     window.location.href = '/res/origin/表1-1.doc';
 };
 
 var modifyDownload = function(){
-	   var accont = $.cookie('account');
-	   var id = "modifyed";
-	   var token = $.cookie('access_token');
-     $.get('/download/file',{account:account,token:token,fileId:fileId},function (data) {
-
-     });
+	   var name = $.cookie('account');
+	   window.location.href = '/res/user/'+name+'/out.doc';
 };
 
 var updateView = function(){
@@ -502,3 +494,5 @@ var helloStr = '<li class="dropdown">'
 var info_tpl = 	'<div class="alert alert-info" align="center" id="alert">'
 			+	'<strong>{alterText}</strong>'
 			+	'</div>';
+
+var payInfo = "<h1>已缴费成功！</h1>";
