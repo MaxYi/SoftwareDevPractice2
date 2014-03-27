@@ -83,6 +83,16 @@ module.exports = function (app) {
 		else res.redirect('login');
 	});
 
+	// download enroll files
+	app.get('/download/file', function (req,res) {
+		var name = req.param('account')
+			,	fileId = req.param('id');
+		if (fileId === "origin"){
+			res.download('./public/res/origin/表1-1.doc');
+		}
+		else res.download('./public/res/user/'+name+'/out.doc');
+	});
+
 	// post function
 	// For communicate with script in pages
 	/*
