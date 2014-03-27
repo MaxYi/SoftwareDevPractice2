@@ -256,16 +256,30 @@ $(document).ready(function(){
   				updateYszView();
   				break;
 		  	default:
+		  	  isPaid();
   				updateVisiterView();
   				break;
-		  };
+		  }
 		  break;
 		}
 		default:
 			break;
-	}
+		}
+	//isPaid?
+	  
 });
 
+var isPaid = function(){
+	var name = $.cookie('account');
+	  var token = $.cookie('access_token');
+		$.post('/info',{account:name,token:token},function (data) {
+		if (data.isPaid)
+		{
+	      $("#payButton").remove();
+	      
+		}
+	  });
+}
 var updateVisiterView = function(){
 	$("#ico1").remove();
 	$("#ico2").remove();
@@ -455,7 +469,18 @@ var checkname = function(){
   	}
   	else alert('该用户名已被注册');
 	});
-}
+};
+
+var PayRightNow = function(){
+	var account = $.cookie('account');
+	var token = $.cookie('access_token');
+	$.post('/pay',{account:account,token:token}, function(data) {
+		if (data==='OK')
+			alert("支付成功!");
+	});
+  //$("#payButton").remove();
+	//isPaid();
+};
 
 var helloStr = '<li class="dropdown">'
 						+	 '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">你好，{account}<strong class="caret"></strong></a>'
