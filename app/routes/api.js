@@ -86,11 +86,21 @@ module.exports = function (app) {
 	// download enroll files
 	app.get('/download/file', function (req,res) {
 		var name = req.param('account')
+			,	token = req.param('token')
 			,	fileId = req.param('id');
-		if (fileId === "origin"){
-			res.download('./public/res/origin/表1-1.doc');
-		}
-		else res.download('./public/res/user/'+name+'/out.doc');
+
+		userCol.findOne({account:name,token:token}, function (err, data) {
+			if (err) res.send("db error: " + err);
+			else {
+				if (!!data){
+					if (fileId === "origin"){
+						res.download('./public/res/origin/表1-1.doc');
+					}
+					else res.download('./public/res/user/'+name+'/out.doc');
+				}
+				else res.send("alert(cookie已过期，请重新登陆)");
+			}
+		});
 	});
 
 	// post function
