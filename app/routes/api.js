@@ -5,6 +5,7 @@
 var fs = require('fs');
 var officegen = require('officegen');
 var mkdirp = require('mkdirp');
+var exec = require('child_process').exec;
 
 var docx = officegen ({
     'type': 'docx',
@@ -59,12 +60,14 @@ module.exports = function (app) {
 		var name = req.param('account')
 			,	token = req.param('token');
 
-		// test officegen
-		var out = fs.createWriteStream ('out.doc');
-		docx.generate(out);
-		fs.rename("./out.doc", './public/res/user/'+name+'/out.doc', function(e) {
-      if (e) throw e;
-    });
+		//   test officegen
+		// var out = fs.createWriteStream ('out.doc');
+		// var pObj = docx.createP();
+		// pObj.addText ( 'Simple' );
+		// docx.generate(out);
+		// fs.rename("./out.doc", './public/res/user/'+name+'/out.doc', function(e) {
+		// 	if (e) throw e;
+		// });
 
 		if (!!name && !!token){
 			userCol.findOne({account:name, token:token}, function (err, data) {
@@ -177,7 +180,7 @@ module.exports = function (app) {
 			// get default path
 			, pic_path = req.files.pic.path;
 
-		async.parallel([
+		async.waterfall([
 			// rename the file of submit
 			function (cb) {
 				mkdirp(path, function (err) {
@@ -185,7 +188,7 @@ module.exports = function (app) {
 					else{
 						fs.rename(pic_path, file, function(e) {
 				      if (e) throw e;
-				      else cb(null, true);
+				      else cb(null);
 				    });
 					}
 				});
@@ -197,25 +200,43 @@ module.exports = function (app) {
 					pic_name: req.files.pic.name
 				};
 				var obj = _.extend(o, req.body);
+
 				profileCol.findOne({account:account}, function (e, data) {
 					if (e) console.error("db error: " + e);
 					else if (!data){
 						profileCol.save(obj, {safe:true}, function (err) {
 							if (err) console.error("db error: " + err);
-							else cb(null);
+							else cb(null, obj);
 						});
 					}
 					else{
 						var updateObj = {$set: obj};
 						profileCol.update({account:account}, updateObj, function (err) {
 							if (err) console.error("db error: " + err);
-							else cb(null);
+							else cb(null, obj);
 						});
 					}
 				});
 			},
-			// gen office
+			// make txt
+			function (obj, cb) {
+				userCol.findOne({account:account}, {_id: 0}, function (err, data) {
+					var json_data = _.extend(data, obj);
+					json_data = JSON.stringify(json_data);
+					fs.writeFileSync(__dirname+'/../public/res/temp.json', json_data);
+					cb(null);
+				})
+			},
+			// fill doc
 			function (cb) {
+				// for windows
+				var execPy = exec('python '+__dirname+'/../utils/word.py' ,function (err, out, stderror){
+			    if(err) console.error("run python wrong: " + err);
+			    else{
+			    	fs.unlinkSync(__dirname+'/../public/res/temp.json');
+			    	cb(null);
+			    }
+			  });
 			}],
 			function (err) {
 				if (err) res.send("async error: " + err);
