@@ -264,6 +264,46 @@ module.exports = function (app) {
 		});
 	});
 
+	app.post('/uploadDoc', function (req, res) {
+		var account = req.cookies.account
+			// file path
+			,	path = './public/res/generated/' + '2009_spring/enroll_docs'
+			,	file = path + '/' + req.files.doc.name
+			// get default path
+			, pic_path = req.files.doc.path;
+
+		async.parallel([
+			// rename the file of submit
+			function (cb) {
+				mkdirp(path, function (err) {
+					if (err) console.error(err)
+					else{
+						fs.rename(pic_path, file, function(e) {
+				      if (e) throw e;
+				      else cb(null);
+				    });
+					}
+				});
+			},
+			// db operation
+			function (cb) {
+				var obj = {
+					account: account,
+					doc_name: req.files.pic.name,
+					isUploaded: true
+				};
+				var updateObj = {$set: obj};
+				profileCol.update({account:account}, updateObj, function (err) {
+					if (err) console.error("db error: " + err);
+					else cb(null);
+				});
+			}],
+			function (err) {
+				if (err) res.send("async error: " + err);
+				else res.send('<script>history.back(-1);</script>');
+		});
+	});
+
 	app.post('/info', function (req, res) {
 		var name = req.param('account')
 			,	token = req.param('token');
