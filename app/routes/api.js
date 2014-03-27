@@ -296,7 +296,7 @@ module.exports = function (app) {
 					var updateObj = {$set: {isPaid: true}};
 					profileCol.update({account:name}, updateObj, function (err, data) {
 						if (err) res.send("db error: " + err);
-						else res.json(data);
+						else res.send(200);
 					});
 				}
 				else {
