@@ -341,7 +341,25 @@ var fillInfo = function(){
   });
 };
 
-var updateView =function(){
+var originDownload = function(){
+	   var accont = $.cookie('account');
+	   var fileId = "origin";
+	   var token = $.cookie('access_token');
+     $.get('/download/file',{account:account,token:token,fileId:fileId},function (data) {
+
+     });
+};
+
+var modifyDownload = function(){
+	   var accont = $.cookie('account');
+	   var id = "modifyed";
+	   var token = $.cookie('access_token');
+     $.get('/download/file',{account:account,token:token,fileId:fileId},function (data) {
+
+     });
+};
+
+var updateView = function(){
 	var name = $.cookie('account');
 
 	var dropDown = helloStr.replace("{account}",name);
