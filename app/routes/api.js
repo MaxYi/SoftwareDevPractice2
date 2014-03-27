@@ -284,4 +284,25 @@ module.exports = function (app) {
 			}
 		});
 	});
+
+	app.post('/pay', function (req, res) {
+		var name = req.param('account')
+			,	token = req.param('token');
+
+		userCol.findOne({account:name, token:token}, function (err, data) {
+			if (err) res.send("db error: " + err);
+			else {
+				if (!!data){
+					var updateObj = {$set: {isPaid: true}};
+					profileCol.update({account:name}, updateObj, function (err, data) {
+						if (err) res.send("db error: " + err);
+						else res.json(data);
+					});
+				}
+				else {
+					res.send(403);
+				}
+			}
+		});
+	});
 };
