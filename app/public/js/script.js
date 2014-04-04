@@ -279,6 +279,7 @@ var isPaid = function(){
 	      $("#payButton").remove();
 	      $("#payLabel").remove();
 	      $("#payH1").append(payInfo);
+	      //return true;
 		}
   });
 }
@@ -354,17 +355,30 @@ var fillInfo = function(){
 			$("#input_degree_time").val(data.degree_time);
 			$("#input_degree_num").val(data.degree_num);
 			$("#input_location").val(data.location);
+
+			_PROFILE = data; 
     }
   });
 };
 
 var originDownload = function(){
-     window.location.href = '/res/origin/表1-1.doc';
+		if (is_paid){
+		    window.location.href = '/res/origin/表1-1.doc';
+		}
+		else
+		{
+			alert("未成功报名,无法下载");
+		}
 };
 
 var modifyDownload = function(){
-	   var name = $.cookie('account');
-	   window.location.href = '/res/user/'+name+'/out.doc';
+	  if (isPaid()){
+		   var name = $.cookie('account');
+		   window.location.href = '/res/user/'+name+'/out.doc';
+	  }
+	  else{
+	  	alert("未成功报名，无法下载");
+	  }
 };
 
 var updateView = function(){
