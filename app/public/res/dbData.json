@@ -4,122 +4,122 @@
 		{
 			"name":"贾诩",
 			"id":"6310001",
-			"studyTime":2009-03-01,
-			"credit":134
+			"studyTime":2010-03-01,
+			"credit":160
 		},
 		{
 			"name":"郭嘉",
 			"id":"6310028",
-			"studyTime":2010-09-01,
-			"credit":120
+			"studyTime":2011-09-01,
+			"credit":180
 		},
 		{
 			"name":"曹洪",
 			"id":"632034",
-			"studyTime":2011-09-01,
-			"credit":151
+			"studyTime":2012-09-01,
+			"credit":160
 		},
 		{
 			"name":"周瑜",
 			"id":"632301",
 			"studyTime":2012-09-01,
-			"credit":159
+			"credit":200
 		},
 		{
 			"name":"太史慈",
 			"id":"632150",
-			"studyTime":2000-03-01,
-			"credit":163
+			"studyTime":2013-03-01,
+			"credit":177
 		},
 		{
 			"name":"甘宁",
 			"id":"630949",
 			"studyTime":2013-09-01,
-			"credit":80
+			"credit":180
 		},
 		{
 			"name":"马腾",
 			"id":"632150",
-			"studyTime":2010-09-01,
-			"credit":159
+			"studyTime":2011-09-01,
+			"credit":162
 		},
 		{
 			"name":"嬴政",
 			"id":"632222",
-			"studyTime":2001-03-01,
-			"credit":123
+			"studyTime":2012-03-01,
+			"credit":158
 		},
 		{
 			"name":"项羽",
 			"id":"632223",
-			"studyTime":2001-03-01,
-			"credit":145
+			"studyTime":2012-03-01,
+			"credit":133
 		},
 		{
 			"name":"刘邦",
 			"id":"632399",
-			"studyTime":2002-09-01,
-			"credit":155
+			"studyTime":2012-09-01,
+			"credit":161
 		},
 		{
 			"name":"张良",
 			"id":"635871",
-			"studyTime":2008-03-01,
-			"credit":144
+			"studyTime":2011-03-01,
+			"credit":167
 		},
 		{
 			"name":"韩信",
 			"id":"633782",
-			"studyTime":2007-09-01,
-			"credit":137
+			"studyTime":2011-09-01,
+			"credit":170
 		},
 		{
 			"name":"樊哙",
 			"id":"631236",
-			"studyTime":2009-09-01,
-			"credit":125
+			"studyTime":2012-09-01,
+			"credit":158
 		},
 		{
 			"name":"吕不韦",
 			"id":"631398",
-			"studyTime":2010-03-01,
-			"credit":132
+			"studyTime":2012-03-01,
+			"credit":168
 		},
 		{
 			"name":"关平",
 			"id":"632351",
-			"studyTime":2010-03-01,
-			"credit":145
+			"studyTime":2011-03-01,
+			"credit":163
 		},
 		{
 			"name":"夏侯渊",
 			"id":"631231",
 			"studyTime":2012-03-01,
-			"credit":159
+			"credit":164
 		},
 		{
 			"name":"张辽",
 			"id":"631245",
 			"studyTime":2013-09-01,
-			"credit":132
+			"credit":162
 		},
 		{
 			"name":"刘表",
 			"id":"632361",
 			"studyTime":2011-09-01,
-			"credit":137
+			"credit":163
 		},
 		{
 			"name":"袁绍",
 			"id":"634585",
-			"studyTime":2010-03-01,
-			"credit":147
+			"studyTime":2011-03-01,
+			"credit":167
 		},
 		{
 			"name":"孙坚",
 			"id":"639421",
-			"studyTime":2003-03-01,
-			"credit":141
+			"studyTime":2012-03-01,
+			"credit":170
 		}
 	]
 }
