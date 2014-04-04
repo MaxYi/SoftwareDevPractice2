@@ -271,15 +271,16 @@ $(document).ready(function(){
 
 var isPaid = function(){
 	var name = $.cookie('account');
-	  var token = $.cookie('access_token');
-		$.post('/info',{account:name,token:token},function (data) {
+  var token = $.cookie('access_token');
+	$.post('/info',{account:name,token:token},function (data) {
+		_PROFILE = _.clone(data);
 		if (data.isPaid)
 		{
 	      $("#payButton").remove();
 	      $("#payLabel").remove();
 	      $("#payH1").append(payInfo);
 		}
-	  });
+  });
 }
 var updateVisiterView = function(){
 	$("#ico1").remove();
@@ -287,8 +288,8 @@ var updateVisiterView = function(){
 	$("#ico6").remove();
 	$("#ico8").remove();
 	$("#ico3_s").html("我的信息");
-	$("#ico5_s").html("报名");
 	$("#ico4_s").html("缴费");
+	$("#ico5_s").html("报名");
 	$("#ico7_s").html("考试相关");
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 用户");
 	$("#welcomeText").html(welText);
@@ -312,13 +313,13 @@ var updateFyszView = function(){
 
 var updateYszView = function(){
 	$("#ico2").remove();
-	$("#ico3").remove();
-	$("#ico4").remove();	
+	$("#ico4").remove();
 	$("#ico6").remove();
 	$("#ico8").remove();
-	$("#ico5_s").html("招生");
 	$("#ico1_s").html("审核");
+	$("#ico5_s").html("招生");
 	$("#ico7_s").html("录入");
+	$("#ico3").remove();
 
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 教务");
 	$("#welcomeText").html(welText);
@@ -335,6 +336,7 @@ var fillInfo = function(){
 			$("#account_img").attr("src","img/img1.png");
 		}
 		else{
+			_PROFILE = _.clone(data);
 			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
 			if (!!parseInt($.cookie('CURRENT_ACCOUNT_TYPE'))){
 				$("#welcomeText").find("strong").html("欢迎，" + data.name);
@@ -467,8 +469,12 @@ var PayRightNow = function(){
 	var account = $.cookie('account');
 	var token = $.cookie('access_token');
 	$.post('/pay',{account:account,token:token}, function(data) {
-		if (data==='OK')
+		if (data==='OK'){
 			alert("支付成功!");
+			$("#payButton").remove();
+      $("#payLabel").remove();
+      $("#payH1").append(payInfo);
+		}
 	});
   //$("#payButton").remove();
 	//isPaid();
