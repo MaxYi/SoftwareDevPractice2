@@ -294,38 +294,53 @@ var updateVisiterView = function(){
 	$("#ico7_s").html("考试相关");
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 用户");
 	$("#welcomeText").html(welText);
-	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	//$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	$("#account_name").html($.cookie('account'));
 	fillInfo();
 };
 
 var updateStudentView = function(){
+	$("#ico1").remove();
+	$("#ico5").remove();
+	$("#ico8").remove();
+	$("#ico6").remove();
+
+	$("#ico2_s").html("学籍信息");
+	$("#ico7_s").html("课程信息");
+
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 学生");
 	$("#welcomeText").html(welText);
-	
+	$("#account_name").html($.cookie('account'));
 	fillInfo();
 };
 
 var updateFyszView = function(){
+
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 分教务");
 	$("#welcomeText").html(welText);
+	$("#account_name").html($.cookie('account'));
 	// admin not have name in v1.0
-	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	// $("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
 };
 
 var updateYszView = function(){
 	$("#ico2").remove();
 	$("#ico4").remove();
-	$("#ico6").remove();
+	//$("#ico6").remove();
 	$("#ico8").remove();
+	$("#ico7").remove();
+	//$("#ico3").remove(); 
+	//ico3 是后台初始界面，如果remove掉，会出现错误
 	$("#ico1_s").html("审核");
 	$("#ico5_s").html("招生");
-	$("#ico7_s").html("录入");
-	$("#ico3").remove();
+	//$("#ico7_s").html("成绩录入");
+	
 
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 教务");
 	$("#welcomeText").html(welText);
 	// admin not have name in v1.0
-	$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	//$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
+	$("#account_name").html($.cookie('account'));
 };
 
 var fillInfo = function(){
@@ -510,6 +525,68 @@ var helloStr = '<li class="dropdown">'
 						+		'</li>'
 						+		'</ul>'
 						+		'</li>';
+
+var YszEnterScoresTabStr = '<div class="text-section">'
+													+	'<h1>报考资格审核</h1>'
+													+	'</div>'
+													+ '<div class="col-md-8">'
+													+	'<article>'
+													+	'<table class="table table-striped">'
+													+	'<thead>'
+													+	'<tr>'
+													+	'<th></th>'
+													+	'<th>准考证</th>'
+													+	'<th>姓名</th>'
+													+	'<th>身份证号</th>'
+													+	'<th>基础综合</th>'
+													+	'<th>专业基础</th>'
+													+	'<th>综合面试</th>'
+													+	'<th>总分</th>'
+													+	'</tr>'
+													+	'</thead>'
+													+	'<tbody id="tableContainer">'
+													+	'<tr>'
+													+	'<td id="count_{NO}">1</td>'
+													+	'<td id="name_{NO}">太史慈</td>'
+													+	'<td id="id_{NO}">软件工程硕士招生考试</td>'
+													+	'<td id="foundation_synthetic_{NO}"><input type="text" size="3"></td></td>'
+													+	'<td id="professional_basis_{NO}"><input type="text" size="3"></td>'
+													+	'<td id="overall_interview_{NO}"><input type="text" size="3"></td>'
+													+	'<td id="total_interview_{NO}"><input type="text" size="3"></td>'
+													+	'</tr>'
+													+	'</tbody>'
+													+	'</table>'
+													+	'</article>'
+													+	'</div>';
+
+var SchoolRegisterManagementTabStr = '<div class="text-section">'
+																	+	'<h1>学籍管理</h1>'
+																	+	'</div>'
+																	+ '<div class="col-md-8">'
+																	+	'<article>'
+																	+	'<table class="table table-striped">'
+																	+	'<thead>'
+																	+	'<tr>'
+																	+	'<th></th>'
+																	+	'<th>学号</th>'
+																	+	'<th>姓名</th>'
+																	+	'<th>注册状态</th>'
+																	+	'<th>缴费状态</th>'
+																	+	'<th>学籍状态</th>'
+																	+	'</tr>'
+																	+	'</thead>'
+																	+	'<tbody id="tableContainer">'
+																	+	'<tr>'
+																	+	'<td id="count_{NO}">1</td>'
+																	+	'<td id="name_{NO}">太史慈</td>'
+																	+	'<td id="registration_status_{NO}">已注册</td>'
+																	+	'<td id="pay_status_{NO}">已缴费</td></td>'
+																	+	'<td id="status_{NO}">在读</td>'
+																	+	'</tr>'
+																	+	'</tbody>'
+																	+	'</table>'
+																	+	'</article>'
+																	+	'</div>';
 
 var info_tpl = 	'<div class="alert alert-info" align="center" id="alert">'
 			+	'<strong>{alterText}</strong>'
