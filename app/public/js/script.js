@@ -107,6 +107,24 @@ var login = function () {
 	});
 };
 
+var courseEnsure = function{
+	var cousreName = $("#courseNameSelect").val();
+	$.post('/course',{courseName:courseName},function (data,stu) {
+  	if (data === "OK") {
+  			
+  	}
+	});
+}
+
+var scoreDone = function(){
+	var i = $("#studentList")
+	$.post('/course',{courseName:courseName},function (data) {
+  	if (data === "OK") {
+  			
+  	}
+	});
+}
+
 var upload = function () {
 	if (uploadCheck())
 	{
@@ -414,6 +432,80 @@ var updateView = function(){
 		$("#tab").append(dropDown);
   }
 };
+
+var verifySuccess = function(){
+		var account = $("name_{NO}");
+		var result = true;
+		$.post('/verify', {account: account,result:result}, function (msg) {
+		  if (msg === "OK"){
+		  	$("#verifySuccess_{NO}").remove();
+		  	$("#verifyFail_{NO}").remove();
+		  	$("#verifyFunc_{NO}").html("审核已完成");
+		  	$("#auditStatus_{NO}").html("通过");
+	  	}
+		});
+}
+
+var verifyFail = function(){
+		var account = $("name_{NO}");
+		var result = false;
+		$.post('/verify', {account: account,result:result}, function (msg) {
+		  if (msg === "OK"){
+		  	$("#verifySuccess_{NO}").remove();
+		  	$("#verifyFail_{NO}").remove();
+		  	$("#verifyFunc_{NO}").html("审核已完成");
+		  	$("#auditStatus_{NO}").html("不通过");
+	  	}
+		});
+}
+
+// var CheckCourseInfo = function(){
+// 	if ( $("#educationStation").val().length == 0) {
+// 		alert("请输入教学点名称");
+// 		$("#education_station").focus();
+// 		return false;
+// 	}
+// 	if ( $("#termInfo").val().length == 0) {
+// 		alert("请输入学期信息");
+// 		$("#termInfo").focus();
+// 		return false;
+// 	}
+// 	if ( $("#courseName").val().length == 0) {
+// 		alert("请输入课程名称");
+// 		$("#courseName").focus();
+// 		return false;
+// 	}
+// 	if ( $("#courseCredit").val().length == 0) { 
+// 		alert("请输入学分数");
+// 		$("#courseCredit").focus();
+// 		return false;
+// 	}
+// 	if ( $("#courseTecher").val().length == 0) {
+// 		alert("请输入任课老师");
+// 		$("#courseTecher").focus();
+// 		return false;
+// 	}
+// 	if ( $("#courseNature").val().length == 0) {
+// 		alert("请输入课程性质");
+// 		$("#courseNature").focus();
+// 		return false;
+// 	}
+// 	if ( $("#studentName").val().length == 0) {
+// 		alert("请输入学生姓名");
+// 		$("#studentName").focus();
+// 		return false;
+// 	}	
+// 	if ( $("#studentNo").val().length == 0) {
+// 		alert("请输入学生学号");
+// 		$("#studentNo").focus();
+// 		return false;
+// 	}	
+// 		if ( $("#studentScore").val().length == 0) {
+// 		alert("请输入学生成绩");
+// 		$("#studentScore").focus();
+// 		return false;
+// 	}	
+// };
 
 var CheckForm = function(){
   if ( $("#account").val().length == 0) {
