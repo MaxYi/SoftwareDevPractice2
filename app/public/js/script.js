@@ -548,11 +548,6 @@ var CheckForm = function(){
 		$("#inputPassword").focus();
 		return false;
 	}
-	// if (document.registeForm.checkNum.value == "") {
-	// 	alert("请输入验证码");
-	// 	document.registeForm.checkNum.focus();
-	// 	return false;
-	// }
 	if ($("#tele").val().length == 0) {
 		alert("请输入您的手机号码");
 		$("#tele").focus();
@@ -597,8 +592,6 @@ var PayRightNow = function(){
       $("#payH1").append(payInfo);
 		}
 	});
-  //$("#payButton").remove();
-	//isPaid();
 };
 
 var helloStr = '<li class="dropdown">'
