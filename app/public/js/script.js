@@ -326,13 +326,14 @@ var updateFyszView = function(){
 var updateYszView = function(){
 	$("#ico2").remove();
 	$("#ico4").remove();
-	$("#ico6").remove();
+	//$("#ico6").remove();
 	$("#ico8").remove();
+	$("#ico7").remove();
 	//$("#ico3").remove(); 
 	//ico3 是后台初始界面，如果remove掉，会出现错误
 	$("#ico1_s").html("审核");
 	$("#ico5_s").html("招生");
-	$("#ico7_s").html("录入");
+	//$("#ico7_s").html("成绩录入");
 	
 
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 教务");
