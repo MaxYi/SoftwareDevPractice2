@@ -159,6 +159,8 @@ module.exports = function (app) {
 			,	phone : tele
 			,	token : ""
 			,	type : 0
+			, isPaid : false
+			, isVerified : null
 		};
 
 		if (!!account && !!pwd && !!email && !!tele){
@@ -350,7 +352,7 @@ module.exports = function (app) {
 			else {
 				if (!!data){
 					var updateObj = {$set: {isPaid: true}};
-					profileCol.update({account:name}, updateObj, function (err, data) {
+					userCol.update({account:name}, updateObj, function (err, data) {
 						if (err) res.send("db error: " + err);
 						else res.send(200);
 					});
@@ -384,7 +386,7 @@ module.exports = function (app) {
 									name: ele.name
 								,	id: ele.id
 								, ifQualified: false
-								,	position: "zb"
+								,	position: ele.position
 							};
 
 							if (tGap >= oneYear && tGap <= oneYear*5 && ele.credit >= 160){
@@ -399,6 +401,25 @@ module.exports = function (app) {
 				}
 			});
 		}
+	});
+
+	// teacher verify the signed up student
+	app.post('/verify', function (req, res) {
+		var name = req.param('targetAccount')
+			,	result = req.param('result');
+
+		if (typeof result=== "boolean" && result || result === "true")
+			var updateObj = {$set: {isVerified: true}};
+		else
+			var updateObj = {$set: {isVerified: false}};
+		userCol.update({account:name}, updateObj, function (err, data) {
+			if (err) res.send("db error: " + err);
+			else res.send(200);
+		});
+	});
+
+	app.post('/courseInfo', function (req, res) {
+		// body...
 	});
 
 	var ensureAccountType = function(account){
