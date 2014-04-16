@@ -107,18 +107,26 @@ var login = function () {
 	});
 };
 
-var courseEnsure = function{
+var courseEnsure = function(){
 	var cousreName = $("#courseNameSelect").val();
-	$.post('/course',{courseName:courseName},function (data,stu) {
-  	if (data === "OK") {
-  			
+	$.post('/course',{courseName:courseName},function(msg,data) {
+  	if (msg === "OK") {
+  			var welText;
+				var allListText;
+			  for (var i=0;i<data.length;i++)
+				{
+					welText = $("#studentListTableContainer").html().replace("{NO}",i);	
+					welText = $("#studentListTableContainer").html().replace("{studentId}",data[i].id);
+					welText = $("#studentListTableContainer").html().replace("{studentName_}",data[i].name);
+					allListText = allListText + welText;
+				}
+				$("#studentListTableContainer").html(allListText);
   	}
 	});
-}
+};
 
 var scoreDone = function(){
-	var i = $("#studentList")
-	$.post('/course',{courseName:courseName},function (data) {
+	$.post('/score',{},function (data) {
   	if (data === "OK") {
   			
   	}
@@ -291,7 +299,7 @@ var isPaid = function(){
 	var name = $.cookie('account');
   var token = $.cookie('access_token');
 	$.post('/info',{account:name,token:token},function (data) {
-		// _PROFILE = _.clone(data);
+		_PROFILE = _.clone(data);
 		if (data.isPaid)
 		{
 	      $("#payButton").remove();
@@ -345,20 +353,38 @@ var updateYszView = function(){
 	$("#ico2").remove();
 	$("#ico4").remove();
 	//$("#ico6").remove();
-	$("#ico8").remove();
+	//$("#ico8").remove();
 	$("#ico7").remove();
 	//$("#ico3").remove(); 
 	//ico3 是后台初始界面，如果remove掉，会出现错误
 	$("#ico1_s").html("审核");
 	$("#ico5_s").html("招生");
 	//$("#ico7_s").html("成绩录入");
-	
 
 	var welText = $("#welcomeText").html().replace("Welcome","身份： 教务");
 	$("#welcomeText").html(welText);
 	// admin not have name in v1.0
 	//$("#welcomeText").find("strong").html("欢迎，" + $.cookie('account'));
 	$("#account_name").html($.cookie('account'));
+
+
+	$.post('/verifyStu', function (msg,data) {
+		if (msg==="OK"){
+				var welText;
+				var allListText;
+			  for (var i=0;i<data.length;i++)
+				{
+					welText = $("#varifyTableContainer").html().replace("{NO}",i);	
+					welText = $("#varifyTableContainer").html().replace("{varify_tpl_count}",i);
+					welText = $("#varifyTableContainer").html().replace("{varify_tpl_name}",data[i].name);
+					welText = $("#varifyTableContainer").html().replace("{varify_tpl_exam}",data[i].exam);
+					welText = $("#varifyTableContainer").html().replace("{varify_tpl_state}",data[i].state);
+
+					allListText = allListText + welText;
+				}
+				$("#varifyTableContainer").html(allListText);
+		}
+	});
 };
 
 var fillInfo = function(){
@@ -370,7 +396,7 @@ var fillInfo = function(){
 			$("#account_img").attr("src","img/img1.png");
 		}
 		else{
-			// _PROFILE = _.clone(data);
+			_PROFILE = _.clone(data);
 			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
 			if (!!parseInt($.cookie('CURRENT_ACCOUNT_TYPE'))){
 				$("#welcomeText").find("strong").html("欢迎，" + data.name);
@@ -389,7 +415,7 @@ var fillInfo = function(){
 			$("#input_degree_num").val(data.degree_num);
 			$("#input_location").val(data.location);
 
-			// _PROFILE = data; 
+			_PROFILE = data; 
     }
   });
 };
@@ -423,7 +449,7 @@ var updateView = function(){
 };
 
 var verifySuccess = function(){
-		var account = $("name_{NO}");
+		var account = $("#name").html();
 		var result = true;
 		$.post('/verify', {account: account,result:result}, function (msg) {
 		  if (msg === "OK"){
@@ -436,7 +462,7 @@ var verifySuccess = function(){
 }
 
 var verifyFail = function(){
-		var account = $("name_{NO}");
+		var account = $("#name_").html();
 		var result = false;
 		$.post('/verify', {account: account,result:result}, function (msg) {
 		  if (msg === "OK"){
@@ -579,6 +605,7 @@ var PayRightNow = function(){
 			$("#payButton").remove();
       $("#payLabel").remove();
       $("#payH1").append(payInfo);
+      $.cookie('isPaid', true);
 		}
 	});
 };
@@ -599,6 +626,28 @@ var helloStr = '<li class="dropdown">'
 						+		'</li>'
 						+		'</ul>'
 						+		'</li>';
+
+var info_tpl = 	'<div class="alert alert-info" align="center" id="alert">'
+			+	'<strong>{alterText}</strong>'
+			+	'</div>';
+
+var payInfo = "<h1>已缴费成功！</h1>";
+
+var varify_tpl = 		'<tr>'
+									+ '<td id="count_{NO}">{varify_tpl_count}</td>'
+									+ '<td id="name_{NO}">{varify_tpl_name}</td>'
+									+ '<td id="enrollName_{NO}">{varify_tpl_exam}</td>'
+									+ '<td id="auditStatus_{NO}">{varify_tpl_state}</td>'
+									+ '<td id="verifyFunc_{NO}">'
+									+ '<button type="button" class="btn btn-primary" id="verifySuccess_{NO}" onclick="verifySuccess({NO})">通过</button>'
+									+ '<button type="button" class="btn btn-primary" id="verifyFail_{NO}" onclick="verifyFail({NO})">不通过</button>'
+									+ '</td>'
+									+ '</tr>';
+
+
+
+
+
 
 var YszEnterScoresTabStr = '<div class="text-section">'
 													+	'<h1>报考资格审核</h1>'
@@ -661,9 +710,3 @@ var SchoolRegisterManagementTabStr = '<div class="text-section">'
 																	+	'</table>'
 																	+	'</article>'
 																	+	'</div>';
-
-var info_tpl = 	'<div class="alert alert-info" align="center" id="alert">'
-			+	'<strong>{alterText}</strong>'
-			+	'</div>';
-
-var payInfo = "<h1>已缴费成功！</h1>";
