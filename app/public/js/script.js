@@ -395,23 +395,12 @@ var fillInfo = function(){
 };
 
 var originDownload = function(){
-		if (is_paid){
-		    window.location.href = '/res/origin/表1-1.doc';
-		}
-		else
-		{
-			alert("未成功报名,无法下载");
-		}
+	window.location.href = '/res/origin/表1-1.doc';
 };
 
 var modifyDownload = function(){
-	  if (isPaid()){
-		   var name = $.cookie('account');
-		   window.location.href = '/res/user/'+name+'/out.doc';
-	  }
-	  else{
-	  	alert("未成功报名，无法下载");
-	  }
+	var name = $.cookie('account');
+	window.location.href = '/res/user/'+name+'/out.doc';
 };
 
 var updateView = function(){

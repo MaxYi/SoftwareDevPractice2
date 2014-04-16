@@ -84,7 +84,14 @@ module.exports = function (app) {
 				if (err) res.send("db error: " + err);
 				else {
 					if (!!data){
-						res.render('adminPanel');
+						if (data.type === 3){
+							userCol.find({isSignUp:true, type:0})
+						 .toArray( function (err, data) {
+								res.render('adminPanel', {data: data});
+							});
+						}
+						else
+							res.render('adminPanel');
 					}
 					else res.redirect('login');
 				}
@@ -159,6 +166,7 @@ module.exports = function (app) {
 			,	phone : tele
 			,	token : ""
 			,	type : 0
+			,	isSignUp : false
 			, isPaid : false
 			, isVerified : null
 		};
@@ -198,7 +206,11 @@ module.exports = function (app) {
 								var type = ensureAccountType(name);
 								res.cookie('type', type , { maxAge: expire , signed: false });
 								if (type === 2) {
+									// data.position
 									res.cookie('position', "zb" , { maxAge: expire , signed: false });
+								}
+								if (type === 0) {
+									res.cookie('isPaid', data.isPaid , { maxAge: expire , signed: false });
 								}
 								res.send(200);
 							}
