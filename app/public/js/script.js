@@ -2,7 +2,7 @@
  * @author GuGeyi & Qian Yi
  */
 
-var _PROFILE = {};
+// var _PROFILE = {};
 
 var ACCOUNT_TYPE = {
 		visitor : 0
@@ -273,7 +273,7 @@ var isPaid = function(){
 	var name = $.cookie('account');
   var token = $.cookie('access_token');
 	$.post('/info',{account:name,token:token},function (data) {
-		_PROFILE = _.clone(data);
+		// _PROFILE = _.clone(data);
 		if (data.isPaid)
 		{
 	      $("#payButton").remove();
@@ -337,7 +337,7 @@ var fillInfo = function(){
 			$("#account_img").attr("src","img/img1.png");
 		}
 		else{
-			_PROFILE = _.clone(data);
+			// _PROFILE = _.clone(data);
 			$("#account_img").attr("src","res/user/"+name+"/"+data.pic_name);
 			if (!!parseInt($.cookie('CURRENT_ACCOUNT_TYPE'))){
 				$("#welcomeText").find("strong").html("欢迎，" + data.name);
@@ -356,7 +356,7 @@ var fillInfo = function(){
 			$("#input_degree_num").val(data.degree_num);
 			$("#input_location").val(data.location);
 
-			_PROFILE = data; 
+			// _PROFILE = data; 
     }
   });
 };

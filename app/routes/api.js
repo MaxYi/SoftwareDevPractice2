@@ -7,6 +7,13 @@ var officegen = require('officegen');
 var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
 
+var ACCOUNT_TYPE = {
+		visitor : 0
+	,	student : 1
+	,	fysz : 2
+	,	ysz : 3
+};
+
 var docx = officegen ({
     'type': 'docx',
     'onend': function( size ){
@@ -30,12 +37,15 @@ var uuid = require('../utils/uuid');
 var _ = require('../utils/underscore');
 var async = require('../utils/async');
 
+var _token = [];
+
 module.exports = function (app) {
 
 	var dbclient = app.get('dbclient');
 
 	var userCol = dbclient.collection('user');
 	var profileCol = dbclient.collection('profile');
+	var tempCol = dbclient.collection('temp');
 
 	// GET FUNCTION
 	// Just get pages in browser
@@ -182,6 +192,12 @@ module.exports = function (app) {
 							else{
 								res.cookie('account', name , { maxAge: expire , signed: false });
 								res.cookie('access_token', token , { maxAge: expire , signed: false });
+								// configure type
+								var type = ensureAccountType(name);
+								res.cookie('type', type , { maxAge: expire , signed: false });
+								if (type === 2) {
+									res.cookie('position', "zb" , { maxAge: expire , signed: false });
+								}
 								res.send(200);
 							}
 						});
@@ -345,4 +361,63 @@ module.exports = function (app) {
 			}
 		});
 	});
+
+	app.post('/getQualifiedStudent', function (req, res) {
+		var name = req.param('account')
+			,	token = req.param('access_token');
+
+		if (!!name && !!token){
+			userCol.findOne({account:name, token:token}, function (err, data) {
+				if (err) res.send("db error: " + err);
+				else {
+					if (!!data){
+						var dbData = require(__dirname + '/../public/res/dbData.json')
+							,	obj = { data: []}
+							,	today = new Date()
+							,	oneYear = 1000 * 60 * 60 * 24 * 365;
+
+						dbData.data.forEach(function (ele, ind) {
+							var time = new Date(ele.studyTime)
+								,	tGap = today - time;
+
+							obj.data[ind] = {
+									name: ele.name
+								,	id: ele.id
+								, ifQualified: false
+								,	position: "zb"
+							};
+
+							if (tGap >= oneYear && tGap <= oneYear*5 && ele.credit >= 160){
+								obj.data[ind]['ifQualified'] = true;
+							}
+						});
+
+						if (dbData.data.length === obj.data.length)
+							res.json(obj);
+					}
+					else res.send(403);
+				}
+			});
+		}
+	});
+
+	var ensureAccountType = function(account){
+	  var accountSub = account.substring(0,2)
+	  	,	type;
+	  switch(accountSub)
+	  {
+			case "63":
+			  type = ACCOUNT_TYPE.student;
+			  break;
+			case "21":
+			  type = ACCOUNT_TYPE.fysz;
+			  break;
+			case "20":
+			  type = ACCOUNT_TYPE.ysz;
+			  break;
+			default:
+			  type = ACCOUNT_TYPE.visitor;
+		};
+	  return type;
+	};
 };
